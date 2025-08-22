@@ -4,9 +4,6 @@ This directory tracks all modifications made to the Omarchy codebase for develop
 
 ## Naming Convention
 - `000-TEMPLATE.md` - Template for documenting changes
-- `001-change_name.md` - First documented change
-- `002-another_change.md` - Second documented change
-- etc.
 
 ## Purpose
 Each change file documents:

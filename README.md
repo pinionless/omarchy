@@ -10,6 +10,8 @@ Read more at [omarchy.org](https://omarchy.org).
 |-----------|----------|---------------|--------|
 | Terminal | Alacritty | Ghostty | Modern terminal with better performance |
 | Text Editor | Neovim + LazyVim | nano | Simplified editing experience |
+| File Manager | Nautilus | Krusader | Advanced dual-pane file manager with better features |
+| Webapps | HEY, Basecamp, Google Photos, Google Messages, ChatGPT, YouTube, GitHub, X, Figma, Discord | Google AI Studio, Google Calendar, Google Sheets, Claude.ai | Productivity-focused webapp collection |
 
 ## License
 
