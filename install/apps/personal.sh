@@ -22,4 +22,15 @@ if [ -z "$OMARCHY_BARE" ]; then
   echo "No personal packages configured yet."
 fi
 
-echo "Personal applications installation complete."
+# Personal webapp installations
+echo "Installing personal webapps..."
+
+if [ -z "$OMARCHY_BARE" ]; then
+  # Custom productivity webapps (moved from main installation for easier upstream syncing)
+  omarchy-webapp-install "Google AI Studio" https://aistudio.google.com https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-ai.png
+  omarchy-webapp-install "Google Calendar" https://calendar.google.com https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-calendar.png
+  omarchy-webapp-install "Google Sheets" https://sheets.google.com https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-sheets.png
+  omarchy-webapp-install "Claude" https://claude.ai https://claude.ai/favicon.svg
+fi
+
+echo "Personal applications and webapps installation complete."

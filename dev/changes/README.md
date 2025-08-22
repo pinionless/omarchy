@@ -6,12 +6,11 @@ This directory tracks all modifications made to the Omarchy codebase for develop
 - `000-TEMPLATE.md` - Template for documenting changes
 - `001-replace-alacritty-with-ghostty.md` - Replace Alacritty terminal with Ghostty
 - `002-remove_lazyvim_replace_with_nano.md` - Replace LazyVim/Neovim with nano editor
-- `003-replace-webapps.md` - Replace webapps with productivity-focused set
-- `004-replace-nautilus-with-krusader.md` - Replace Nautilus with Krusader file manager
-- `005-remove-media-and-cloud-apps.md` - Remove media editing and cloud applications
-- `006-remove-zoom.md` - Remove Zoom video conferencing application
-- `007-remove-spotify.md` - Remove Spotify music streaming application
-- `008-add-personal-apps-extension.md` - Add personal apps extension system
+- `003-replace-nautilus-with-krusader.md` - Replace Nautilus with Krusader file manager
+- `004-remove-bloat-applications.md` - Remove unnecessary bloat applications (media, cloud, entertainment)
+- `005-remove-original-webapps.md` - Remove original webapps (social, entertainment, business)
+- `006-add-personal-apps-extension.md` - Add personal apps extension system
+- `007-add-new-webapps.md` - Add productivity-focused webapps
 
 ## Purpose
 Each change file documents:

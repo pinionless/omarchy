@@ -1,7 +1,7 @@
 # Change Documentation: Replace Nautilus with Krusader
 
 ## Change Information
-- **Change ID**: 004
+- **Change ID**: 003
 - **Change Name**: replace-nautilus-with-krusader
 - **Date**: 2025-08-22
 

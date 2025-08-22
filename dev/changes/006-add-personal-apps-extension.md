@@ -1,7 +1,7 @@
 # Add Personal Apps Extension System
 
 ## Change Information
-- **Change ID**: 008
+- **Change ID**: 006
 - **Change Name**: Add personal apps extension system
 - **Date**: 2025-08-22
 
