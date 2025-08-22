@@ -22,16 +22,16 @@ menu() {
 }
 
 terminal() {
-  alacritty --class Omarchy -e $1
+  ghostty --class=Omarchy -e $1
 }
 
 present_terminal() {
-  alacritty --class Omarchy -e bash -c "omarchy-show-logo; eval \"$1\"; omarchy-show-done;"
+  ghostty --class=Omarchy -e bash -c "omarchy-show-logo; eval \"$1\"; omarchy-show-done;"
 }
 
 edit_in_nvim() {
   notify-send "Editing config file" "$1"
-  alacritty -e nvim "$1"
+  ghostty -e nvim "$1"
 }
 
 open_web() {
@@ -132,8 +132,8 @@ show_setup_menu() {
   options="$options\n  Config\n󰈷  Fingerprint\n  Fido2"
 
   case $(menu "Setup" "$options") in
-  *Audio*) alacritty --class=Wiremix -e wiremix ;;
-  *Wifi*) alacritty --class=Impala -e impala ;;
+  *Audio*) ghostty --class=Wiremix -e wiremix ;;
+  *Wifi*) ghostty --class=Impala -e impala ;;
   *Bluetooth*) blueberry ;;
   *Power*) show_setup_power_menu ;;
   *Monitors*) edit_in_nvim ~/.config/hypr/monitors.conf ;;

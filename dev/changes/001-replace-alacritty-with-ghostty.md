@@ -1,0 +1,212 @@
+# Change Documentation Template
+
+## Change Information
+- **Change ID**: 001
+- **Change Name**: replace-alacritty-with-ghostty
+- **Date**: 2025-01-22
+- **Author**: pinion
+
+## Goal
+Replace Alacritty terminal emulator with Ghostty across the entire Omarchy system. This includes removing all Alacritty configurations, package installations, and references, while adding equivalent Ghostty configurations and ensuring all terminal-related functionality works with the new terminal.
+
+## Files Modified
+
+### New Files
+- `config/ghostty/config` - Main Ghostty configuration file
+- `default/ghostty/screensaver.config` - Ghostty screensaver configuration
+- `themes/catppuccin/ghostty.config` - Catppuccin theme for Ghostty
+- `themes/catppuccin-latte/ghostty.config` - Catppuccin Latte theme for Ghostty
+- `themes/tokyo-night/ghostty.config` - Tokyo Night theme for Ghostty
+- `themes/gruvbox/ghostty.config` - Gruvbox theme for Ghostty
+- `themes/matte-black/ghostty.config` - Matte Black theme for Ghostty
+- `themes/nord/ghostty.config` - Nord theme for Ghostty
+- `themes/rose-pine/ghostty.config` - Rose Pine theme for Ghostty
+- `themes/everforest/ghostty.config` - Everforest theme for Ghostty
+- `themes/kanagawa/ghostty.config` - Kanagawa theme for Ghostty
+- `themes/osaka-jade/ghostty.config` - Osaka Jade theme for Ghostty
+- `themes/ristretto/ghostty.config` - Ristretto theme for Ghostty
+
+### Modified Files  
+- `install/development/terminal.sh` - Changed alacritty to ghostty package
+- `config/hypr/bindings.conf` - Updated terminal variable to use ghostty
+- `config/hypr/input.conf` - Updated window rule class name
+- `config/waybar/config.jsonc` - Updated all alacritty commands to ghostty
+- `applications/nvim.desktop` - Updated Exec command to use ghostty
+- `applications/Activity.desktop` - Updated Exec command to use ghostty  
+- `applications/wiremix.desktop` - Updated Exec command to use ghostty
+- `applications/Docker.desktop` - Updated Exec command to use ghostty
+- `applications/About.desktop` - Updated Exec command to use ghostty
+- `bin/omarchy-menu` - Updated terminal function and references
+- `bin/omarchy-theme-set` - Updated config reload to touch ghostty config
+- `bin/omarchy-font-current` - Updated to read from ghostty config file
+- `bin/omarchy-font-set` - Updated to modify ghostty config file
+- `bin/omarchy-launch-screensaver` - Updated command and config file path
+- `bin/omarchy-cmd-screensaver` - Updated pkill command for ghostty
+- `bin/omarchy-lock-screen` - Updated pkill command for ghostty
+- `migrations/1754568612.sh` - Updated migration to reference ghostty
+
+### Deleted Files
+- `config/alacritty/alacritty.toml` - Removed Alacritty main config
+- `default/alacritty/screensaver.toml` - Removed Alacritty screensaver config
+- `themes/*/alacritty.toml` - Removed all Alacritty theme configurations
+
+## Changes Made
+
+### Package Installation
+- **File**: `install/development/terminal.sh`
+- **Change**: Line 8: `alacritty` → `ghostty`
+- **Purpose**: Install Ghostty instead of Alacritty on fresh installations
+
+### Configuration System  
+#### Main Configuration
+- **Created**: `config/ghostty/config`
+- **Contents**: 
+  ```
+  config-file = ~/.config/omarchy/current/theme/ghostty.config
+  term = xterm-256color
+  font-family = CaskaydiaMono Nerd Font  
+  font-size = 9
+  window-padding-x = 14
+  window-padding-y = 14
+  window-decorations = false
+  background-opacity = 0.98
+  keybind = f11=toggle_fullscreen
+  ```
+- **Deleted**: `config/alacritty/alacritty.toml` (TOML format)
+
+#### Screensaver Configuration  
+- **Created**: `default/ghostty/screensaver.config`
+- **Contents**:
+  ```
+  background = 000000
+  cursor-color = 000000
+  font-size = 18
+  background-opacity = 1.0
+  ```
+- **Deleted**: `default/alacritty/screensaver.toml`
+
+#### Theme Configurations (11 themes)
+- **Created**: `themes/*/ghostty.config` for each theme
+- **Format conversion**: TOML `[colors.primary]` sections → key=value pairs
+- **Color syntax**: `background = "#24273a"` → `background = 24273a` (no # prefix)
+- **Color mapping**: 
+  - `[colors.normal] black = "..."` → `palette = 0=...`
+  - `[colors.bright] black = "..."` → `palette = 8=...`
+  - `[colors.cursor] cursor = "..."` → `cursor-color = ...`
+  - `[colors.selection] background = "..."` → `selection-background = ...`
+- **Deleted**: All `themes/*/alacritty.toml` files
+
+### Script Updates
+#### Terminal Launch Commands
+- **Files**: `bin/omarchy-menu`, `config/hypr/bindings.conf`, `config/waybar/config.jsonc`
+- **Changes**: All `alacritty` commands → `ghostty` commands
+- **Example**: `alacritty --class=Wiremix -e wiremix` → `ghostty --class=Wiremix -e wiremix`
+
+#### Font Management  
+- **File**: `bin/omarchy-font-current`
+- **Change**: `grep -oP 'family\s*=\s*"\K[^"]+' ~/.config/alacritty/alacritty.toml` 
+  → `grep -oP 'font-family\s*=\s*\K.*' ~/.config/ghostty/config`
+
+- **File**: `bin/omarchy-font-set`  
+- **Change**: `sed -i "s/family = \".*\"/family = \"$font_name\"/g" ~/.config/alacritty/alacritty.toml`
+  → `sed -i "s/font-family = .*/font-family = $font_name/g" ~/.config/ghostty/config`
+
+#### Theme System
+- **File**: `bin/omarchy-theme-set`
+- **Change**: `touch "$HOME/.config/alacritty/alacritty.toml"` → `touch "$HOME/.config/ghostty/config"`
+
+#### Screensaver System
+- **Files**: `bin/omarchy-launch-screensaver`, `bin/omarchy-cmd-screensaver`, `bin/omarchy-lock-screen`
+- **Changes**: 
+  - `alacritty --class Screensaver --config-file ~/.local/share/omarchy/default/alacritty/screensaver.toml`
+    → `ghostty --class Screensaver --config-file ~/.local/share/omarchy/default/ghostty/screensaver.config`
+  - `pkill -f "alacritty --class Screensaver"` → `pkill -f "ghostty --class Screensaver"`
+
+### Desktop Applications
+#### Standard Applications
+- **Files**: `applications/nvim.desktop`, `applications/Activity.desktop`, `applications/wiremix.desktop`, `applications/Docker.desktop`
+- **Change**: `Exec=alacritty --class=...` → `Exec=ghostty --class=...`
+
+#### Special Syntax Conversion
+- **File**: `applications/About.desktop`  
+- **Change**: `Exec=alacritty -o "font.size=9" --class=About --title=About -e bash -c 'fastfetch; read -n 1 -s'`
+  → `Exec=ghostty --font-size=9 --class=About --title=About -e bash -c 'fastfetch; read -n 1 -s'`
+- **Reason**: Ghostty uses `--font-size=N` instead of `-o "font.size=N"`
+
+## Migration Required
+- [x] Yes - Migration needed for existing installations
+- [ ] No - Changes apply automatically via refresh/update
+
+### Migration Details (if required)
+#### Migration Script: `migrations/1755868213.sh`
+
+**Package Management**:
+```bash
+if pacman -Q alacritty &>/dev/null; then
+  yay -S --noconfirm ghostty
+  yay -Rs --noconfirm alacritty
+fi
+```
+
+**User Configuration Updates**:
+```bash
+# Waybar configuration
+if grep -q "alacritty" ~/.config/waybar/config.jsonc; then
+  sed -i 's|alacritty|ghostty|g' ~/.config/waybar/config.jsonc
+  omarchy-restart-waybar
+fi
+
+# Hyprland bindings  
+if grep -q "alacritty" ~/.config/hypr/bindings.conf; then
+  sed -i 's|alacritty|ghostty|g' ~/.config/hypr/bindings.conf
+fi
+
+# Desktop files in user's applications directory
+if grep -l "alacritty" ~/.local/share/applications/*.desktop 2>/dev/null; then
+  sed -i 's|alacritty|ghostty|g' ~/.local/share/applications/*.desktop 2>/dev/null
+  # Fix About.desktop font syntax
+  sed -i 's|ghostty -o "font\.size=9"|ghostty --font-size=9|g' ~/.local/share/applications/About.desktop 2>/dev/null
+fi
+```
+
+**Directory Management**:
+```bash
+# Remove old alacritty configuration
+if [[ -d ~/.config/alacritty ]]; then
+  rm -rf ~/.config/alacritty
+fi
+
+# Create ghostty config directory
+if [[ ! -d ~/.config/ghostty ]]; then
+  mkdir -p ~/.config/ghostty
+fi
+
+# Install new ghostty configuration from omarchy defaults
+omarchy-refresh-config ghostty/config
+```
+
+**Migration Summary**:
+1. ✅ Package replacement (alacritty → ghostty)
+2. ✅ Waybar commands updated  
+3. ✅ Hyprland terminal variable updated
+4. ✅ Desktop files updated with syntax conversion
+5. ✅ Old config directory removed, new one created
+6. ✅ Fresh Ghostty config installed via omarchy-refresh-config
+
+## Testing
+- [x] Tested configuration format conversion
+- [x] Tested all theme configurations converted properly 
+- [x] Tested package installation update
+- [x] Tested theme switching functionality
+- [x] Created and tested migration for existing installations
+
+## Notes
+- **FIXED**: Configuration format properly converted from TOML to key=value syntax
+- **FIXED**: All theme configurations converted with proper color syntax (removed # prefixes)
+- **FIXED**: Font configuration converted to use 'font-family' instead of 'family' key  
+- **FIXED**: All script references updated from alacritty to ghostty commands
+- **FIXED**: Migration script (`1755868213.sh`) handles package replacement and config cleanup
+- Configuration file is named 'config' instead of 'alacritty.toml' in the ~/.config/ghostty/ directory
+
+## Related Issues/PRs
+[Link to any related GitHub issues or pull requests]

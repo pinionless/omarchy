@@ -1,0 +1,19 @@
+# Import theme configuration
+config-file = ~/.config/omarchy/current/theme/ghostty.config
+
+# Environment variables
+term = xterm-256color
+
+# Font configuration
+font-family = CaskaydiaMono Nerd Font
+font-size = 9
+
+# Window configuration  
+window-padding-x = 14
+window-padding-y = 14
+window-decoration = false
+background-opacity = 0.98
+confirm-close-surface = false
+
+# Keybindings
+keybind = f11=toggle_fullscreen

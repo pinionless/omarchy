@@ -39,8 +39,8 @@ else
   gsettings set org.gnome.desktop.interface icon-theme "Yaru-blue"
 fi
 
-# Trigger alacritty config reload
-touch "$HOME/.config/alacritty/alacritty.toml"
+# Trigger ghostty config reload
+touch "$HOME/.config/ghostty/config"
 
 # Restart components to apply new theme
 pkill -SIGUSR2 btop
