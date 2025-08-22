@@ -4,6 +4,13 @@ Turn a fresh Arch installation into a fully-configured, beautiful, and modern we
 
 Read more at [omarchy.org](https://omarchy.org).
 
+## Changes from Original
+
+| Component | Original | Replaced With | Reason |
+|-----------|----------|---------------|--------|
+| Terminal | Alacritty | Ghostty | Modern terminal with better performance |
+| Text Editor | Neovim + LazyVim | nano | Simplified editing experience |
+
 ## License
 
 Omarchy is released under the [MIT License](https://opensource.org/licenses/MIT).

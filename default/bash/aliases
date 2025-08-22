@@ -27,7 +27,7 @@ alias ....='cd ../../..'
 alias g='git'
 alias d='docker'
 alias r='rails'
-n() { if [ "$#" -eq 0 ]; then nvim .; else nvim "$@"; fi; }
+n() { if [ "$#" -eq 0 ]; then nano .; else nano "$@"; fi; }
 
 # Git
 alias gcm='git commit -m'
