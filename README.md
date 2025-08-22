@@ -12,7 +12,7 @@ Read more at [omarchy.org](https://omarchy.org).
 | Text Editor | Neovim + LazyVim | nano | Simplified editing experience |
 | File Manager | Nautilus | Krusader | Advanced dual-pane file manager with better features |
 | Webapps | HEY, Basecamp, Google Photos, Google Messages, ChatGPT, YouTube, GitHub, X, Figma, Discord | Google AI Studio, Google Calendar, Google Sheets, Claude.ai | Productivity-focused webapp collection |
-| Applications | OBS Studio, Kdenlive, xournalpp, Typora, 1Password, Dropbox, Tailscale | Removed | Minimal installation focused on core development tools |
+| Applications | OBS Studio, Kdenlive, xournalpp, Typora, 1Password, Dropbox, Tailscale, Zoom | Removed | Minimal installation focused on core development tools |
 
 ## License
 

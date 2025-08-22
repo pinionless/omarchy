@@ -12,6 +12,7 @@ Replace the current collection of web applications with a more productivity-focu
 
 ### Modified Files  
 - `install/apps/webapps.sh` - Removed 9 webapps and added 4 new productivity-focused webapps
+- `config/hypr/bindings.conf` - Updated keyboard shortcuts to match new webapp set
 
 ## Changes Made
 
@@ -33,6 +34,17 @@ Replace the current collection of web applications with a more productivity-focu
   - Google Calendar (https://calendar.google.com) - Calendar and scheduling
   - Google Sheets (https://sheets.google.com) - Spreadsheet application
   - Claude.ai (https://claude.ai) - AI assistant
+
+### Keyboard Bindings
+- **Updated bindings**:
+  - Super+A: ChatGPT → Google AI Studio
+  - Super+C: HEY Calendar → Google Calendar  
+  - Super+E: HEY Email → Google Sheets
+  - Super+Y: YouTube → Claude.ai
+- **Removed bindings**:
+  - Super+X: X/Twitter
+  - Super+Shift+X: X Post
+  - Super+Alt+G: Google Messages
 
 ## Migration Required
 - [ ] Yes - Migration needed for existing installations

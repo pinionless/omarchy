@@ -9,6 +9,8 @@ This directory tracks all modifications made to the Omarchy codebase for develop
 - `003-replace-webapps.md` - Replace webapps with productivity-focused set
 - `004-replace-nautilus-with-krusader.md` - Replace Nautilus with Krusader file manager
 - `005-remove-media-and-cloud-apps.md` - Remove media editing and cloud applications
+- `006-remove-zoom.md` - Remove Zoom video conferencing application
+- `007-remove-spotify.md` - Remove Spotify music streaming application
 
 ## Purpose
 Each change file documents:
