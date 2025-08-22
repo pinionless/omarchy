@@ -14,3 +14,6 @@ fi
 
 # Copy over Omarchy applications
 source omarchy-refresh-applications || true
+
+# Source personal applications if available
+[ -f "$OMARCHY_INSTALL/apps/personal.sh" ] && source "$OMARCHY_INSTALL/apps/personal.sh"

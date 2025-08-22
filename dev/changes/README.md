@@ -11,6 +11,7 @@ This directory tracks all modifications made to the Omarchy codebase for develop
 - `005-remove-media-and-cloud-apps.md` - Remove media editing and cloud applications
 - `006-remove-zoom.md` - Remove Zoom video conferencing application
 - `007-remove-spotify.md` - Remove Spotify music streaming application
+- `008-add-personal-apps-extension.md` - Add personal apps extension system
 
 ## Purpose
 Each change file documents:
