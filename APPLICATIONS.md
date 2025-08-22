@@ -1,10 +1,25 @@
 # Omarchy Applications List
 
-This document lists all applications and packages installed by the omarchy-minimal setup script, organized by category.
+This document lists all applications and packages installed by the omarchy-minimal setup script, organized by installation method.
 
-## Desktop Environment
+## Installation Methods Overview
 
-### Window Manager & Core
+| Method | Description | Package Count |
+|--------|-------------|---------------|
+| **Official Arch Repos** | Standard pacman packages via yay | ~60 packages |
+| **AUR** | Arch User Repository packages | ~20 packages |
+| **Chaotic-AUR** | Pre-built AUR binaries | 1 package |
+| **mise** | Development tool version manager | Multiple runtimes |
+| **Docker** | Container images | 4 database services |
+| **Web Apps** | PWA-style applications via Chromium | 6 applications |
+| **External Installers** | Custom installation scripts | 2 services |
+| **Source Build** | Compiled from source | 1 utility |
+
+---
+
+## Official Arch Linux Repository (via yay/pacman)
+
+### Desktop Environment & Window Manager
 - **hyprland** - Modern Wayland compositor and window manager
 - **hyprshot** - Screenshot utility for Hyprland
 - **hyprpicker** - Color picker utility
@@ -13,94 +28,33 @@ This document lists all applications and packages installed by the omarchy-minim
 - **hyprsunset** - Blue light filter/night mode
 - **hyprland-qtutils** - Qt utilities for Hyprland integration
 
-### Status Bar & Launcher
+### Status Bar & Desktop Integration
 - **waybar** - Customizable status bar for Wayland
-- **walker-bin** (AUR) - Application launcher and dmenu replacement
-- **libqalculate** - Calculator engine for walker
-
-### Desktop Integration
 - **xdg-desktop-portal-hyprland** - Desktop portal for Hyprland
 - **xdg-desktop-portal-gtk** - GTK desktop portal (file pickers, etc.)
 - **swaybg** - Wallpaper/background setter
 - **mako** - Notification daemon
 - **swayosd** - On-screen display for volume/brightness changes
+- **libqalculate** - Calculator engine for walker
 
-## Applications
-
-### File Management
+### File Management & System
 - **krusader** - Advanced dual-pane file manager
-- **nautilus** - GNOME file manager (legacy, being replaced)
-- **sushi** - File previewer for nautilus (legacy)
 - **gvfs-mtp** - MTP device support for file managers
 - **ffmpegthumbnailer** - Video thumbnail generator
 
-### Web & Communication
-- **chromium** - Open-source web browser
-- **signal-desktop** - Secure messaging application
-- **localsend-bin** (AUR) - Local network file sharing
-
-### Media & Graphics
+### Media Applications
 - **mpv** - Lightweight video player
 - **imv** - Image viewer for Wayland
 - **evince** - PDF document viewer
-- **obs-studio** - Streaming and screen recording
-- **kdenlive** - Video editing software
-- **pinta** - Simple image editing (optional install)
 
-### Productivity & Office
-- **obsidian-bin** (AUR) - Note-taking and knowledge management
-- **libreoffice** - Office suite (documents, spreadsheets, presentations)
-- **xournalpp** - PDF annotation and handwritten notes
-- **gnome-calculator** - Calculator application
-
-### Screenshots & Recording
+### System Tools & Utilities
+- **brightnessctl** - Screen brightness control
+- **playerctl** - Media player control via CLI
 - **slurp** - Screen region selector
-- **satty** (AUR) - Screenshot annotation tool
 - **wf-recorder** - Screen recorder (NVIDIA systems)
 - **wl-screenrec** - Screen recorder (non-NVIDIA systems)
 
-## Web Applications (PWA-style)
-- **WhatsApp** - Web-based messaging
-- **Google Contacts** - Contact management
-- **Google AI Studio** - AI development platform
-- **Google Calendar** - Calendar and scheduling
-- **Google Sheets** - Spreadsheet application
-- **Claude** - AI assistant
-
-## Development Tools
-
-### Version Control & Project Management
-- **git** - Distributed version control system
-- **github-cli** - GitHub command line interface
-- **lazygit** - Terminal UI for git commands
-- **lazydocker-bin** (AUR) - Terminal UI for Docker
-
-### Build Tools & Compilers
-- **base-devel** - Essential build tools (make, gcc, etc.)
-- **cargo** - Rust package manager and build tool
-- **clang llvm** - LLVM compiler infrastructure
-- **gcc14** - Legacy GCC version for compatibility
-
-### Development Environment
-- **mise** - Development tool version manager (replaces asdf)
-- **docker docker-compose docker-buildx** - Container platform
-- **mariadb-libs postgresql-libs** - Database client libraries
-
-### Text Editor
-- **nano** - Simple terminal text editor
-
-## Terminal & CLI Tools
-
-### Terminal Emulator
-- **ghostty** (AUR) - Modern GPU-accelerated terminal
-
-### System Information & Monitoring
-- **fastfetch** - System information display
-- **btop** - Modern system monitor and process viewer
-- **brightnessctl** - Screen brightness control
-- **playerctl** - Media player control via CLI
-
-### File Operations & Navigation
+### Terminal & CLI Tools
 - **fd** - Modern find replacement
 - **eza** - Modern ls replacement with colors and icons
 - **fzf** - Fuzzy finder for files and commands
@@ -109,124 +63,240 @@ This document lists all applications and packages installed by the omarchy-minim
 - **bat** - Syntax-highlighted cat replacement
 - **wl-clipboard** - Wayland clipboard utilities
 - **wl-clip-persist** - Clipboard persistence for Wayland
+- **fastfetch** - System information display
+- **btop** - Modern system monitor and process viewer
 
-### Network & System Utilities
-- **wget curl unzip** - Download and archive utilities
+### Network & Archive Tools
+- **wget** - File downloader
+- **curl** - Data transfer tool
+- **unzip** - Archive extraction
 - **jq** - JSON processor and query tool
 - **xmlstarlet** - XML processing toolkit
 - **inetutils** - Network utilities (ping, telnet, etc.)
-- **plocate** - Fast file locating system
 
-### Documentation & Help
-- **man tldr less whois** - Documentation and help tools
+### Documentation & System Info
+- **man** - Manual pages
+- **tldr** - Simplified command examples
+- **less** - Text pager
+- **whois** - Domain lookup utility
+- **plocate** - Fast file locating system
 - **bash-completion** - Enhanced bash tab completion
 - **gum** - Interactive shell components and prompts
 - **impala** - TUI for Linux commands
 
-## Audio & Media Control
-
 ### Audio System
 - **pamixer** - PulseAudio/PipeWire mixer
-- **wiremix** (AUR) - PipeWire mixer interface
 - **wireplumber** - PipeWire session manager
 
-## System Services & Authentication
+### Development Tools
+- **git** - Distributed version control system
+- **github-cli** - GitHub command line interface
+- **lazygit** - Terminal UI for git commands
+- **mise** - Development tool version manager
+- **base-devel** - Essential build tools (make, gcc, etc.)
+- **cargo** - Rust package manager and build tool
+- **clang** - LLVM compiler
+- **llvm** - LLVM compiler infrastructure
+- **gcc14** - Legacy GCC version for compatibility
+- **docker** - Container platform
+- **docker-compose** - Multi-container Docker applications
+- **docker-buildx** - Extended build capabilities
+- **mariadb-libs** - MariaDB client libraries
+- **postgresql-libs** - PostgreSQL client libraries
 
-### Authentication & Security
+### Security & Authentication
 - **polkit-gnome** - PolicyKit authentication agent
 - **gnome-keyring** - Secure credential storage
+- **ufw** - Uncomplicated Firewall
+- **ufw-docker** - Docker integration for UFW
 
-### Power & Hardware Management
+### System Services
 - **power-profiles-daemon** - System power management
-- **ufw ufw-docker** - Uncomplicated Firewall
-- **tzupdate** (AUR) - Automatic timezone detection
-
-### Boot & System
 - **plymouth** - Boot splash screen system
-- **uwsm** - Wayland session manager
+- **iwd** - Wireless network daemon (conditional)
 
 ### Printing System
-- **cups cups-pdf cups-filters cups-browsed** - Complete printing stack
+- **cups** - Common UNIX Printing System
+- **cups-pdf** - PDF printer backend
+- **cups-filters** - Print filters
+- **cups-browsed** - Network printer discovery
 - **system-config-printer** - Printer configuration GUI
-- **avahi nss-mdns** - Network printer discovery
+- **avahi** - Service discovery
+- **nss-mdns** - Multicast DNS resolution
 
-### Networking
-- **iwd** - Wireless network daemon (if needed)
+### Input & Internationalization
+- **fcitx5** - Input method framework
+- **fcitx5-gtk** - GTK integration for fcitx5
+- **fcitx5-qt** - Qt integration for fcitx5
 
-## Input & Internationalization
-- **fcitx5 fcitx5-gtk fcitx5-qt** - Input method framework for multilingual typing
+### Applications
+- **chromium** - Open-source web browser
+- **signal-desktop** - Secure messaging application
+- **gnome-calculator** - Calculator application
+- **libreoffice** - Office suite (documents, spreadsheets, presentations)
 
-## Fonts & Typography
+### Bluetooth
+- **blueberry** - Bluetooth device management GUI
+
+### Fonts (Core)
 - **ttf-font-awesome** - Icon font for UI elements
-- **ttf-cascadia-mono-nerd** (AUR) - Monospace font with programming ligatures
-- **ttf-ia-writer** (AUR) - Clean typography font
-- **noto-fonts noto-fonts-emoji** - Google's comprehensive font family
+- **noto-fonts** - Google's comprehensive font family
+- **noto-fonts-emoji** - Emoji support
 - **ttf-jetbrains-mono** - JetBrains programming font (if not OMARCHY_BARE)
-- **noto-fonts-cjk noto-fonts-extra** - Extended international fonts (if not OMARCHY_BARE)
+- **noto-fonts-cjk** - CJK character support (if not OMARCHY_BARE)
+- **noto-fonts-extra** - Extended international fonts (if not OMARCHY_BARE)
 
-## Themes & Appearance
+### Themes & Appearance
 - **kvantum-qt5** - Qt5 theming engine
 - **gnome-themes-extra** - Additional GTK themes (includes Adwaita-dark)
 - **yaru-icon-theme** - Ubuntu's Yaru icon set
 
-## Bluetooth & Hardware
-- **blueberry** - Bluetooth device management GUI
-
-## Optional/Conditional Installs
-
-### Graphics (NVIDIA Systems)
+### NVIDIA Support (Conditional)
 - **nvidia-open-dkms** or **nvidia-dkms** - NVIDIA kernel drivers
-- **nvidia-utils lib32-nvidia-utils** - NVIDIA userspace libraries
+- **nvidia-utils** - NVIDIA userspace utilities
+- **lib32-nvidia-utils** - 32-bit NVIDIA libraries
 - **egl-wayland** - EGL Wayland support for NVIDIA
 - **libva-nvidia-driver** - Hardware video acceleration
-- **qt5-wayland qt6-wayland** - Qt Wayland support
+- **qt5-wayland** - Qt5 Wayland support
+- **qt6-wayland** - Qt6 Wayland support
+- **linux-headers** - Kernel headers (various versions)
 
-### Entertainment & Gaming
-- **steam** - Gaming platform (via omarchy-install-steam)
-- **spotify** (AUR) - Music streaming (optional, may fail)
-- **zoom** (AUR) - Video conferencing (optional, may fail)
-
-### Security & Authentication
-- **1password-beta 1password-cli** (AUR) - Password manager (optional, may fail)
-- **fprintd usbutils** - Fingerprint authentication (via omarchy-setup-fingerprint)
-- **libfido2 pam-u2f** - FIDO2/WebAuthn hardware keys (via omarchy-setup-fido2)
-
-### Cloud Storage
-- **dropbox dropbox-cli libappindicator-gtk3 python-gpgme** - Dropbox sync (via omarchy-install-dropbox)
-
-### VPN & Networking
-- **tailscale** - Mesh VPN service (via external installer)
-
-### Specialized Hardware
-- **asdcontrol** - Apple Studio Display brightness control (source build)
-
-### Creative Software
-- **typora** (AUR) - Markdown editor (optional, may fail)
-
-## Docker Database Services (Optional)
-- **MySQL 8.4** - MySQL database server container
-- **PostgreSQL 16** - PostgreSQL database server container
-- **MariaDB 11.8** - MariaDB database server container
-- **Redis 7** - Redis in-memory database container
-
-## Language Runtimes (via mise)
-The following development environments are available through the mise version manager:
-- **Ruby** - Ruby programming language
-- **Node.js** - JavaScript runtime
-- **Python** - Python programming language
-- **Go** - Go programming language
-- **Java** - Java development kit
-- **PHP** - PHP programming language
-- **Other languages** - Many more available via mise plugins
-
-## Package Sources
-- **Official Arch Repositories** - Most packages (~70)
-- **AUR (Arch User Repository)** - Community packages (~25)
-- **Chaotic-AUR** - Pre-built AUR packages (yay)
-- **Source Builds** - Custom compiled software (asdcontrol)
-- **External Installers** - Specialized installation scripts (Tailscale, Rust toolchain)
-- **Docker Hub** - Container images for services
+### Hardware Authentication (Optional)
+- **fprintd** - Fingerprint authentication daemon
+- **usbutils** - USB device utilities
+- **libfido2** - FIDO2/WebAuthn library
+- **pam-u2f** - U2F PAM module
 
 ---
 
-*This list represents the complete application suite installed by omarchy-minimal as of the latest version. Some applications may be optional or conditional based on hardware detection or user choices during installation.*
+## AUR (Arch User Repository)
+
+### Essential Tools
+- **walker-bin** - Application launcher and dmenu replacement
+- **wiremix** - PipeWire mixer interface
+- **satty** - Screenshot annotation tool
+- **lazydocker-bin** - Terminal UI for Docker
+
+### Terminal & System
+- **ghostty** - Modern GPU-accelerated terminal
+- **tzupdate** - Automatic timezone detection
+
+### Applications
+- **obsidian-bin** - Note-taking and knowledge management
+- **localsend-bin** - Local network file sharing
+
+### Fonts
+- **ttf-cascadia-mono-nerd** - Nerd font for terminals
+- **ttf-ia-writer** - iA Writer typography font
+
+### Optional Applications (May Fail)
+- **pinta** - Simple image editing
+- **spotify** - Music streaming
+- **zoom** - Video conferencing
+
+### Hardware Utilities
+- **steam** - Gaming platform (optional)
+
+---
+
+## Chaotic-AUR (Pre-built Binaries)
+
+- **yay** - AUR helper for package management
+
+---
+
+## Development Runtimes (via mise)
+
+The mise tool manages these language runtimes and tools:
+
+### Programming Languages
+- **Node.js** - JavaScript runtime
+- **Python** - Python programming language
+- **Ruby** - Ruby programming language
+- **Go** - Go programming language
+- **Java** - Java development kit
+- **PHP** - PHP programming language
+- **Rust** - Rust programming language (via rustup)
+
+### Development Tools
+- **OCaml** - OCaml programming language (via opam)
+- **Python uv** - Fast Python package installer
+
+---
+
+## Docker Containers (Optional)
+
+Database services available via Docker:
+
+- **MySQL 8.4** - MySQL database server
+- **PostgreSQL 16** - PostgreSQL database server
+- **MariaDB 11.8** - MariaDB database server
+- **Redis 7** - Redis in-memory database
+
+---
+
+## Web Applications (PWA-style)
+
+Installed as Chromium web apps:
+
+- **WhatsApp** - Web-based messaging (https://web.whatsapp.com/)
+- **Google Contacts** - Contact management (https://contacts.google.com/)
+- **Google AI Studio** - AI development platform (https://aistudio.google.com)
+- **Google Calendar** - Calendar and scheduling (https://calendar.google.com)
+- **Google Sheets** - Spreadsheet application (https://sheets.google.com)
+- **Claude** - AI assistant (https://claude.ai)
+
+---
+
+## External Installers
+
+### VPN Services
+- **Tailscale** - Mesh VPN service (via curl installer) - **REMOVED**
+
+### Session Management
+- **uwsm** - Wayland session manager (archived package)
+
+---
+
+## Source Builds
+
+### Hardware Control
+- **asdcontrol** - Apple Studio Display brightness control (compiled from source)
+
+---
+
+## Installation Phases
+
+The installation follows this sequence:
+
+1. **Preflight** - AUR setup (yay), base tools, migrations
+2. **Configuration** - System settings, power management, networking, graphics drivers
+3. **Development** - Terminal tools, programming languages (mise), Docker
+4. **Desktop** - Hyprland stack, themes, fonts, hardware support
+5. **Applications** - GUI applications, web apps, productivity tools
+6. **System Update** - Final package database refresh
+
+---
+
+## Removed Applications
+
+The following applications were present in the original omarchy but have been removed in this minimal version:
+
+### Media & Creative (Removed)
+- **OBS Studio** - Streaming and recording software
+- **Kdenlive** - Video editing software
+- **xournalpp** - PDF annotation and note-taking
+- **Typora** - Markdown editor
+
+### Cloud & Security (Removed)
+- **Dropbox** - Cloud storage sync
+- **1Password** - Password manager
+- **Tailscale** - Mesh VPN service
+
+### Editors (Replaced)
+- **Neovim + LazyVim** - Replaced with nano
+- **Nautilus + sushi** - Replaced with Krusader
+
+---
+
+*This installation creates a complete modern Linux desktop focused on web development with the Hyprland window manager, comprehensive development tools via mise, and a minimal but powerful application suite.*

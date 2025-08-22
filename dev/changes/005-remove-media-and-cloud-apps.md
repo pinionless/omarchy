@@ -37,8 +37,16 @@ Remove heavy media editing applications, cloud storage services, and optional ap
   - `bin/omarchy-install-dropbox` - Complete script removal
 
 ## Migration Required
-- [ ] Yes - Migration needed for existing installations
-- [x] No - Changes apply automatically via refresh/update
+- [x] Yes - Migration needed for existing installations
+- [ ] No - Changes apply automatically via refresh/update
+
+### Migration Details (if required)
+Migration `1755886671.sh` will:
+- Identify installed applications that were removed from the setup
+- Provide removal instructions for user choice (doesn't auto-remove)
+- Clean up configuration directories for removed applications
+- Stop and disable Tailscale and Dropbox services if running
+- Inform user about the new minimal focus
 
 ## Testing
 - [ ] Tested on fresh installation
