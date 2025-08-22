@@ -4,6 +4,11 @@ This directory tracks all modifications made to the Omarchy codebase for develop
 
 ## Naming Convention
 - `000-TEMPLATE.md` - Template for documenting changes
+- `001-replace-alacritty-with-ghostty.md` - Replace Alacritty terminal with Ghostty
+- `002-remove_lazyvim_replace_with_nano.md` - Replace LazyVim/Neovim with nano editor
+- `003-replace-webapps.md` - Replace webapps with productivity-focused set
+- `004-replace-nautilus-with-krusader.md` - Replace Nautilus with Krusader file manager
+- `005-remove-media-and-cloud-apps.md` - Remove media editing and cloud applications
 
 ## Purpose
 Each change file documents:

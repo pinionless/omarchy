@@ -174,7 +174,6 @@ show_install_menu() {
   case $(menu "Install" "󰣇  Package\n  Web App\n  Service\n  Style\n󰵮  Development\n  Editor\n󱚤  AI\n  Gaming") in
   *Package*) terminal omarchy-pkg-install ;;
   *Web*) present_terminal omarchy-webapp-install ;;
-  *Service*) show_install_service_menu ;;
   *Style*) show_install_style_menu ;;
   *Development*) show_install_development_menu ;;
   *Editor*) show_install_editor_menu ;;
@@ -185,9 +184,7 @@ show_install_menu() {
 }
 
 show_install_service_menu() {
-  case $(menu "Install" "  Dropbox\n  Tailscale") in
-  *Dropbox*) present_terminal omarchy-install-dropbox ;;
-  *Tailscale*) present_terminal omarchy-install-tailscale ;;
+  case $(menu "Install" "  No services available") in
   *) show_install_menu ;;
   esac
 }
