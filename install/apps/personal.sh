@@ -5,6 +5,33 @@
 # without modifying upstream files, making syncing easier.
 
 # =============================================================================
+# FUNCTION DEFINITIONS
+# =============================================================================
+
+# VSCode theme extension installation function (Ticket 004)
+install_vscode_theme_extensions() {
+  local extensions=(
+    "Catppuccin.catppuccin-vsc"
+    "enkia.tokyo-night" 
+    "jdinhlife.gruvbox"
+    "mvllow.rose-pine"
+    "arcticicestudio.nord-visual-studio-code"
+    "qufiwefefwoyn.kanagawa"
+    "sainnhe.everforest"
+    "devdatvn.matte-black-theme"
+    "sherloach.solarized-osaka"
+  )
+  
+  for extension in "${extensions[@]}"; do
+    echo "Installing VSCode extension: $extension"
+    code --install-extension "$extension" --force || 
+      echo -e "\e[33mFailed to install VSCode extension $extension. Continuing...\e[0m"
+  done
+  
+  echo "VSCode theme extensions installation complete."
+}
+
+# =============================================================================
 # SECTION 1: INSTALL APPS
 # =============================================================================
 
@@ -62,30 +89,3 @@ fi
 echo "Personal webapps installation complete."
 
 echo "All personal installations complete."
-
-# =============================================================================
-# FUNCTION DEFINITIONS
-# =============================================================================
-
-# VSCode theme extension installation function (Ticket 004)
-install_vscode_theme_extensions() {
-  local extensions=(
-    "Catppuccin.catppuccin-vsc"
-    "enkia.tokyo-night" 
-    "jdinhlife.gruvbox"
-    "mvllow.rose-pine"
-    "arcticicestudio.nord-visual-studio-code"
-    "qufiwefefwoyn.kanagawa"
-    "sainnhe.everforest"
-    "devdatvn.matte-black-theme"
-    "sherloach.solarized-osaka"
-  )
-  
-  for extension in "${extensions[@]}"; do
-    echo "Installing VSCode extension: $extension"
-    code --install-extension "$extension" --force || 
-      echo -e "\e[33mFailed to install VSCode extension $extension. Continuing...\e[0m"
-  done
-  
-  echo "VSCode theme extensions installation complete."
-}
