@@ -51,3 +51,6 @@ hyprctl reload
 
 # Set new background
 omarchy-theme-bg-next
+
+# Update VSCode theme if handler exists (Ticket 004)
+[[ -x "$HOME/.local/share/omarchy/bin/omarchy-vscode-theme-handler" ]] && "$HOME/.local/share/omarchy/bin/omarchy-vscode-theme-handler" "$THEME_NAME"
