@@ -6,13 +6,21 @@ Read more at [omarchy.org](https://omarchy.org).
 
 ## Changes from Original
 
-| Component | Original | Replaced With | Reason |
-|-----------|----------|---------------|--------|
-| Terminal | Alacritty | Ghostty | Modern terminal with better performance |
-| Text Editor | Neovim + LazyVim | nano | Simplified editing experience |
-| File Manager | Nautilus | Krusader | Advanced dual-pane file manager with better features |
-| Webapps | HEY, Basecamp, Google Photos, Google Messages, ChatGPT, YouTube, GitHub, X, Figma, Discord | Google AI Studio, Google Calendar, Google Sheets, Claude.ai | Productivity-focused webapp collection |
-| Applications | OBS Studio, Kdenlive, xournalpp, Typora, 1Password, Dropbox, Tailscale, Zoom | Removed | Minimal installation focused on core development tools |
+### Replaced
+- **Terminal**: Alacritty → Ghostty (Modern terminal with better performance)
+- **Text Editor**: Neovim + LazyVim → nano (Simplified editing experience)
+- **File Manager**: Nautilus → Krusader (Advanced dual-pane file manager)
+
+### Removed
+- **Media & Creative Tools**: OBS Studio, Kdenlive, xournalpp, Typora
+- **Cloud Services**: Dropbox, Tailscale
+- **Communication**: Zoom, Spotify
+- **Password Manager**: 1Password
+- **Original Webapps**: HEY, Basecamp, Google Photos, Google Messages, ChatGPT, YouTube, GitHub, X, Figma, Discord
+
+### Added
+- **Productivity Webapps**: Google AI Studio, Google Calendar, Google Sheets, Claude.ai, Bitwarden
+- **Personal Apps Extension**: System for adding custom applications without upstream conflicts
 
 ## License
 
