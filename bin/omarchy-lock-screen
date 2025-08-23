@@ -3,10 +3,12 @@
 # Lock the screen
 pidof hyprlock || hyprlock &
 
-# FIXME ADD BITWARDEN / Ensure 1password is locked
-# if pgrep -x "1password" >/dev/null; then
-#   1password --lock &
-# fi
+# Lock Bitwarden webapp when screen locks
+if pgrep -f "vault.bitwarden.com" >/dev/null; then
+  # Send Ctrl+L to Bitwarden web vault to lock it
+  # This uses hyprctl to focus the window and send the keyboard shortcut
+  hyprctl dispatch focuswindow "vault.bitwarden.com" && sleep 0.1 && hyprctl dispatch sendkey ctrl+l
+fi
 
 # Avoid running screensaver when locked
 pkill -f "ghostty --class=Screensaver"

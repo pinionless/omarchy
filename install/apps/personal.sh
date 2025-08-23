@@ -31,6 +31,9 @@ if [ -z "$OMARCHY_BARE" ]; then
   omarchy-webapp-install "Google Calendar" https://calendar.google.com https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-calendar.png
   omarchy-webapp-install "Google Sheets" https://sheets.google.com https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/google-sheets.png
   omarchy-webapp-install "Claude" https://claude.ai https://claude.ai/favicon.svg
+  
+  # Password management
+  omarchy-webapp-install "Bitwarden" https://vault.bitwarden.com https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/bitwarden.png
 fi
 
 echo "Personal applications and webapps installation complete."
