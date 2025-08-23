@@ -7,19 +7,16 @@
 echo "Installing personal applications..."
 
 if [ -z "$OMARCHY_BARE" ]; then
-  # Add your personal package installations here
-  # Example:
-  # yay -S --noconfirm --needed \
-  #   your-package-name \
-  #   another-package
+  # Personal applications for tickets 006, 007, 008
+  yay -S --noconfirm --needed \
+    thunderbird \
+    firefox
   
-  # For packages that might fail, use individual installs:
-  # for pkg in flaky-package1 flaky-package2; do
-  #   yay -S --noconfirm --needed "$pkg" ||
-  #     echo -e "\e[31mFailed to install $pkg. Continuing without!\e[0m"
-  # done
-  
-  echo "No personal packages configured yet."
+  # AUR packages that might be flaky
+  for pkg in plexamp-appimage; do
+    yay -S --noconfirm --needed "$pkg" ||
+      echo -e "\e[31mFailed to install $pkg. Continuing without!\e[0m"
+  done
 fi
 
 # Personal webapp installations

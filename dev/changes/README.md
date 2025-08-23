@@ -11,6 +11,7 @@ This directory tracks all modifications made to the Omarchy codebase for develop
 - `005-remove-original-webapps.md` - Remove original webapps (social, entertainment, business)
 - `006-add-personal-apps-extension.md` - Add personal apps extension system
 - `007-add-new-webapps.md` - Add productivity-focused webapps
+- `008-install-apps.md` - Install Thunderbird, Firefox, and Plexamp with system integration
 
 ## Purpose
 Each change file documents:
