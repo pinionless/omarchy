@@ -1,25 +1,17 @@
 # bin/omarchy-install-dropbox
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file must remain deleted - do not restore it  
-**SAFE TO UPDATE**: N/A - file is intentionally removed  
-**CONFLICT RESOLUTION**: If upstream adds this file back, delete it again
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Deleted Dropbox installer script as part of service streamlining
+Installation script deleted
 
 ## Diff
 ```diff
--#!/bin/bash
--
--echo "Installing all dependencies..."
--yay -S --noconfirm --needed \
--  dropbox dropbox-cli libappindicator-gtk3 python-gpgme nautilus-dropbox
--
--echo "Starting Dropbox..."
--uwsm app -- dropbox-cli start &>/dev/null &
--echo "See Dropbox icon behind   hover tray in top right and right-click for setup."
+File deleted in fork
 ```
 
 ## Reasoning
-Removed as part of bloat removal (change 004) - Dropbox cloud storage not needed for minimal development-focused system. Also removed corresponding menu option from omarchy-menu.
+Removed installer for application that is no longer supported in minimal fork

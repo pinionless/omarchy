@@ -10,10 +10,17 @@ Add a curated set of productivity-focused webapps to replace the removed origina
 
 ## Files Modified
 
-### Modified Files  
-- `install/apps/personal.sh` - Added 5 productivity-focused webapps (for easier upstream sync)
-- `config/hypr/bindings.conf` - Added keyboard shortcuts for new webapps and replaced 1Password with Bitwarden
+### Modified Files (Currently Existing)
+- `install/packaging/personal.sh` - Added 5 productivity webapps in SECTION 3: INSTALL WEBAPPS
+- `config/hypr/bindings.conf` - Added keyboard shortcuts: Super+G (Google AI Studio), Super+C (Google Calendar), Super+S (Google Sheets), Super+Y (Claude), Super+B (Bitwarden)
 - `bin/omarchy-lock-screen` - Updated to lock Bitwarden vault instead of 1Password when screen locks
+
+### Webapps Added (in personal.sh)
+- **Google AI Studio** (https://aistudio.google.com) - Super+G binding
+- **Google Calendar** (https://calendar.google.com) - Super+C binding  
+- **Google Sheets** (https://sheets.google.com) - Super+S binding
+- **Claude** (https://claude.ai) - Super+Y binding
+- **Bitwarden** (https://vault.bitwarden.com) - Super+B binding
 
 ## Changes Made
 

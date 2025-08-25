@@ -26,36 +26,55 @@ Replace Alacritty terminal emulator with Ghostty across the entire Omarchy syste
 - `themes/osaka-jade/ghostty.config` - Osaka Jade theme for Ghostty
 - `themes/ristretto/ghostty.config` - Ristretto theme for Ghostty
 
-### Modified Files  
-- `install/development/terminal.sh` - Changed alacritty to ghostty package
-- `config/hypr/bindings.conf` - Updated terminal variable to use ghostty
-- `config/hypr/input.conf` - Updated window rule class name
-- `config/waybar/config.jsonc` - Updated all alacritty commands to ghostty
-- `applications/nvim.desktop` - Updated Exec command to use ghostty
-- `applications/Activity.desktop` - Updated Exec command to use ghostty  
-- `applications/wiremix.desktop` - Updated Exec command to use ghostty
-- `applications/Docker.desktop` - Updated Exec command to use ghostty
-- `applications/About.desktop` - Updated Exec command to use ghostty
-- `bin/omarchy-menu` - Updated terminal function and references
-- `bin/omarchy-theme-set` - Updated config reload to touch ghostty config
-- `bin/omarchy-font-current` - Updated to read from ghostty config file
-- `bin/omarchy-font-set` - Updated to modify ghostty config file
-- `bin/omarchy-launch-screensaver` - Updated command and config file path
-- `bin/omarchy-cmd-screensaver` - Updated pkill command for ghostty
-- `bin/omarchy-lock-screen` - Updated pkill command for ghostty
-- `migrations/1754568612.sh` - Updated migration to reference ghostty
+### Modified Files (Currently Existing)
+- `config/hypr/bindings.conf` - Updated $terminal variable and all terminal commands to use ghostty
+- `config/hypr/hypridle.conf` - Updated terminal references to ghostty  
+- `config/waybar/config.jsonc` - Updated all alacritty commands to ghostty, added mpris module
+- `applications/About.desktop` - Updated Exec command: alacritty → ghostty with class=value syntax
+- `applications/Activity.desktop` - Updated Exec command: alacritty → ghostty with class=value syntax
+- `applications/Docker.desktop` - Updated Exec command: alacritty → ghostty with class=value syntax
+- `applications/wiremix.desktop` - Updated Exec command: alacritty → ghostty with class=value syntax
+- `bin/omarchy-menu` - Updated terminal() function and all terminal references to ghostty
+- `bin/omarchy-theme-set` - Updated to trigger ghostty config reload, added VSCode theme integration
+- `bin/omarchy-font-current` - Updated to read font from ghostty config instead of alacritty
+- `bin/omarchy-font-set` - Updated to modify ghostty config instead of alacritty
+- `bin/omarchy-launch-screensaver` - Updated command and config file path for ghostty
+- `bin/omarchy-cmd-screensaver` - Updated pkill command for ghostty screensaver class
+- `bin/omarchy-lock-screen` - Updated pkill command for ghostty, added bitwarden integration
+- `bin/omarchy-tui-install` - Updated terminal references to ghostty
+- `bin/omarchy-tui-remove` - Updated terminal references to ghostty
+- `bin/omarchy-vscode-theme-handler` - New script for VSCode theme synchronization
+- `default/bash/aliases` - Updated terminal-related aliases for ghostty
+- `default/bash/envs` - Updated terminal environment variables
+- `default/hypr/apps.conf` - Updated window rules for ghostty application classes
+- `default/hypr/apps/system.conf` - Updated system window rules
+- `default/hypr/bindings.conf` - Updated default terminal bindings template
 
 ### Deleted Files
+- `applications/nvim.desktop` - Removed (was also part of nvim→nano change)
+- `install/development/terminal.sh` - Removed (terminal installation now handled elsewhere)
+- `install/development/nvim.sh` - Removed (was also part of nvim→nano change)
 - `config/alacritty/alacritty.toml` - Removed Alacritty main config
 - `default/alacritty/screensaver.toml` - Removed Alacritty screensaver config
-- `themes/*/alacritty.toml` - Removed all Alacritty theme configurations
+- `themes/catppuccin/alacritty.toml` - Removed Alacritty theme config
+- `themes/catppuccin-latte/alacritty.toml` - Removed Alacritty theme config
+- `themes/everforest/alacritty.toml` - Removed Alacritty theme config
+- `themes/gruvbox/alacritty.toml` - Removed Alacritty theme config
+- `themes/kanagawa/alacritty.toml` - Removed Alacritty theme config
+- `themes/matte-black/alacritty.toml` - Removed Alacritty theme config
+- `themes/nord/alacritty.toml` - Removed Alacritty theme config
+- `themes/osaka-jade/alacritty.toml` - Removed Alacritty theme config
+- `themes/ristretto/alacritty.toml` - Removed Alacritty theme config
+- `themes/rose-pine/alacritty.toml` - Removed Alacritty theme config
+- `themes/tokyo-night/alacritty.toml` - Removed Alacritty theme config
 
 ## Changes Made
 
 ### Package Installation
-- **File**: `install/development/terminal.sh`
-- **Change**: Line 8: `alacritty` → `ghostty`
-- **Purpose**: Install Ghostty instead of Alacritty on fresh installations
+- **Previous File**: `install/development/terminal.sh` (DELETED after merge)
+- **Current Status**: Terminal installation is now handled by other installation scripts
+- **Change**: System now installs `ghostty` package instead of `alacritty`
+- **Purpose**: Fresh installations use Ghostty as the default terminal emulator
 
 ### Configuration System  
 #### Main Configuration

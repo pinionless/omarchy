@@ -10,9 +10,27 @@ Remove the original collection of webapps that came with Omarchy upstream. These
 
 ## Files Modified
 
-### Modified Files  
-- `install/apps/webapps.sh` - Removed 9 original webapps, kept only essential ones
-- `config/hypr/bindings.conf` - Removed keyboard shortcuts for deleted webapps
+### Modified Files (Currently Existing)
+- `install/packaging/webapps.sh` - Removed 9 original webapps, kept only WhatsApp and Google Contacts
+- `config/hypr/bindings.conf` - Removed keyboard shortcuts for deleted webapps (Super+E, Super+C, Super+Alt+G, Super+A, Super+Y, Super+X, Super+Shift+X)
+
+### Webapps Removed From Core Installation
+The following webapps were removed from `install/packaging/webapps.sh`:
+- HEY (email service)
+- Basecamp (project management)  
+- Google Photos (photo storage)
+- Google Messages (SMS service)
+- ChatGPT (AI assistant)
+- YouTube (video platform)
+- GitHub (code hosting)
+- X/Twitter (social media)
+- Figma (design tool)
+- Discord (communication)
+- Zoom (video conferencing)
+
+### Webapps Kept in Core Installation
+- WhatsApp (messaging)
+- Google Contacts (contact management)
 
 ## Changes Made
 

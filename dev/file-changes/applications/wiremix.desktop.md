@@ -1,18 +1,24 @@
 # applications/wiremix.desktop
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: Terminal command must use `ghostty` instead of `alacritty`  
-**SAFE TO UPDATE**: All other parts of the desktop file can accept upstream changes  
-**CONFLICT RESOLUTION**: If upstream changes the Exec line, adapt their changes but keep `ghostty`
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Replaced Alacritty terminal with Ghostty terminal for Wiremix audio settings
+Terminal replacement: alacritty → ghostty
 
 ## Diff
 ```diff
--Exec=alacritty --class=Wiremix --title=Wiremix -e wiremix
+@@ -0,0 +1,7 @@
++[Desktop Entry]
++Name=Audio Settings
++Comment=Using Wiremix
 +Exec=ghostty --class=Wiremix --title=Wiremix -e wiremix
++Icon=audio-headphones
++Type=Application
++Terminal=false
 ```
 
 ## Reasoning
-Part of the system-wide terminal replacement feature where Alacritty was replaced with Ghostty throughout the system.
+Updated as part of systematic application replacements defined in critical-changes.md

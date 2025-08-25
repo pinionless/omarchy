@@ -10,15 +10,19 @@ Add Microsoft Visual Studio Code to Omarchy with full theme integration support.
 
 ## Files Modified
 
-### New Files
+### New Files (Currently Existing)
 - `bin/omarchy-vscode-theme-handler` - Standalone script to handle VSCode theme updates when Omarchy theme changes
 
-### Modified Files  
-- `install/apps/personal.sh` - Added VSCode installation, theme extensions, and restructured into clear sections (Apps/Extensions/Webapps)
+### Modified Files (Currently Existing)
+- `install/packaging/personal.sh` - Added VSCode installation (visual-studio-code-bin) and install_vscode_theme_extensions() function that installs 9 theme extensions matching Omarchy themes
 - `config/hypr/bindings.conf` - Added Super+V keyboard binding to launch VSCode
-- `bin/omarchy-theme-set` - Added single line hook to execute VSCode theme handler
-- `dev/tickets/TICKET-004-install-vscode.md` - Updated ticket status to Done
-- `dev/tickets/ticket-list.md` - Moved ticket 004 from Medium Priority to Completed section
+- `bin/omarchy-theme-set` - Added VSCode theme handler integration hook
+
+### VSCode Integration Implementation
+- **Package Installation**: `visual-studio-code-bin` installed via personal.sh
+- **Theme Extensions**: 9 extensions installed (Catppuccin, Tokyo Night, Gruvbox, Rose Pine, Nord, Kanagawa, Everforest, Matte Black, Solarized Osaka)
+- **Theme Sync**: omarchy-theme-set calls omarchy-vscode-theme-handler to sync themes automatically
+- **Keyboard Access**: Super+V launches VSCode
 
 ## Changes Made
 

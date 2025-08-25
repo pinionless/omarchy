@@ -1,18 +1,22 @@
 # bin/omarchy-dev-add-migration
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: Must open migration files in nano instead of nvim  
-**SAFE TO UPDATE**: Migration creation logic can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep nano editor, merge other functionality
+**CRITICAL TO PRESERVE**: Editor replacement (nvim→nano) as per critical-changes.md  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Updated migration file editor from nvim to nano
+Terminal/editor replacements as per critical-changes.md
 
 ## Diff
 ```diff
+@@ -3,4 +3,4 @@
+ cd ~/.local/share/omarchy
+ migration_file="$HOME/.local/share/omarchy/migrations/$(git log -1 --format=%cd --date=unix).sh"
+ touch $migration_file
 -nvim $migration_file
 +nano $migration_file
 ```
 
 ## Reasoning
-Part of editor simplification (change 002) - replaced LazyVim/Neovim with nano as the default text editor for development tasks including creating migration files.
+Updated as part of systematic application replacements defined in critical-changes.md

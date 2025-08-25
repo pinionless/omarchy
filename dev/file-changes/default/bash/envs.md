@@ -1,18 +1,22 @@
 # default/bash/envs
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: EDITOR environment variable must be set to `nano` instead of `nvim`  
-**SAFE TO UPDATE**: Other environment variables can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep nano as EDITOR, merge other environment settings
+**CRITICAL TO PRESERVE**: Editor replacement (nvim→nano) as per critical-changes.md  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Changed the default system editor from nvim to nano
+Template updates for application replacements
 
 ## Diff
 ```diff
+@@ -1,4 +1,4 @@
+ # Editor used by CLI
 -export EDITOR="nvim"
 +export EDITOR="nano"
+ export SUDO_EDITOR="$EDITOR"
+ export BAT_THEME=ansi
 ```
 
 ## Reasoning
-Part of editor replacement (change 002) - replaced LazyVim/Neovim with nano as the default text editor, so the system-wide EDITOR environment variable needs to point to nano instead of nvim.
+Updated as part of systematic application replacements defined in critical-changes.md

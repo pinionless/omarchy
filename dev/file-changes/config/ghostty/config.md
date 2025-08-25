@@ -1,25 +1,37 @@
 # config/ghostty/config
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file is required for Ghostty terminal functionality  
-**SAFE TO UPDATE**: Terminal settings and theme integration can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep this file, merge any upstream enhancements
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Added Ghostty main configuration file as part of terminal replacement (Alacritty → Ghostty)
+New ghostty configuration files
 
 ## Diff
 ```diff
+@@ -0,0 +1,19 @@
++# Import theme configuration
 +config-file = ~/.config/omarchy/current/theme/ghostty.config
++
++# Environment variables
 +term = xterm-256color
-+font-family = CaskaydiaMono Nerd Font  
++
++# Font configuration
++font-family = CaskaydiaMono Nerd Font
 +font-size = 9
++
++# Window configuration  
 +window-padding-x = 14
 +window-padding-y = 14
-+window-decorations = false
++window-decoration = false
 +background-opacity = 0.98
++confirm-close-surface = false
++
++# Keybindings
 +keybind = f11=toggle_fullscreen
+\ No newline at end of file
 ```
 
 ## Reasoning
-Created to replace the deleted config/alacritty/alacritty.toml - provides main terminal configuration for Ghostty instead of Alacritty, with theme integration and consistent settings (change 001).
+Updated as part of systematic application replacements defined in critical-changes.md

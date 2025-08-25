@@ -13,16 +13,21 @@ Remove unnecessary applications to create a minimal, focused development environ
 ### New Files
 - None
 
-### Modified Files  
-- `install/desktop/desktop.sh` - Remove OBS, Kdenlive, xournalpp
-- `install/apps/xtras.sh` - Remove 1password, typora, zoom, spotify installations
-- `default/hypr/apps/system.conf` - Remove zoom from opacity windowrule
-- `config/hypr/bindings.conf` - Remove Super+M spotify binding
-- `APPLICATIONS.md` - Remove removed applications from documentation
+### Modified Files (Currently Existing)
+- `default/hypr/apps/system.conf` - Removed window rules and opacity settings for bloat applications (zoom, spotify, etc.)
+- `config/hypr/bindings.conf` - Removed Super+M spotify binding and other bloat app keybindings
 
-### Deleted Files
-- `bin/omarchy-install-dropbox` - Remove Dropbox installation script
-- `applications/xtras/Zoom.desktop` - Remove custom Zoom desktop file
+### Deleted Files (Applications/Scripts Removed)
+- `bin/omarchy-install-dropbox` - Dropbox installation script removed
+- `bin/omarchy-install-tailscale` - Tailscale installation script removed  
+- `applications/typora.desktop` - Typora desktop file removed
+- `applications/hidden/dropbox.desktop` - Hidden Dropbox desktop file removed
+
+### Applications Removed From Installation
+The following applications are no longer installed by Omarchy:
+- **Media/Creative**: obs-studio, kdenlive, xournalpp, typora
+- **Cloud/Security**: dropbox, dropbox-cli, 1password, tailscale  
+- **Communication/Entertainment**: zoom, spotify, discord
 
 ## Changes Made
 

@@ -1,15 +1,16 @@
 # bin/omarchy-vscode-theme-handler
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file is required for VSCode theme integration  
-**SAFE TO UPDATE**: VSCode theme mapping and logic can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep this file, merge any upstream enhancements
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Added VSCode theme integration handler to automatically sync VSCode theme when Omarchy theme changes
+New VSCode theme integration handler
 
 ## Diff
 ```diff
+@@ -0,0 +1,53 @@
 +#!/bin/bash
 +
 +# omarchy-vscode-theme-handler: Updates VSCode theme when Omarchy theme changes
@@ -30,8 +31,41 @@ Added VSCode theme integration handler to automatically sync VSCode theme when O
 +    "catppuccin") vscode_theme="Catppuccin Mocha" ;;
 +    "catppuccin-latte") vscode_theme="Catppuccin Latte" ;;
 +    "tokyo-night") vscode_theme="Tokyo Night" ;;
-+    [... full theme mapping script ...]
++    "gruvbox") vscode_theme="Gruvbox Dark Medium" ;;
++    "rose-pine") vscode_theme="Rosé Pine" ;;
++    "nord") vscode_theme="Nord" ;;
++    "kanagawa") vscode_theme="Kanagawa" ;;
++    "everforest") vscode_theme="Everforest Dark" ;;
++    "matte-black") vscode_theme="Matte Black" ;;
++    "osaka-jade") vscode_theme="Solarized Osaka" ;;
++    "ristretto") vscode_theme="Catppuccin Mocha" ;;
++    *) return 0 ;;  # Skip unknown themes
++  esac
++  
++  # Update or create settings.json with theme
++  if [[ -f "$vscode_settings" ]]; then
++    # Update existing settings using jq
++    if command -v jq &> /dev/null; then
++      jq --arg theme "$vscode_theme" '.["workbench.colorTheme"] = $theme' "$vscode_settings" > "${vscode_settings}.tmp" && mv "${vscode_settings}.tmp" "$vscode_settings"
++    else
++      # Fallback without jq - simple replacement
++      sed -i "s/\"workbench.colorTheme\"[[:space:]]*:[[:space:]]*\"[^\"]*\"/\"workbench.colorTheme\": \"$vscode_theme\"/" "$vscode_settings"
++    fi
++  else
++    # Create new settings file
++    mkdir -p "$(dirname "$vscode_settings")"
++    echo "{\"workbench.colorTheme\": \"$vscode_theme\"}" > "$vscode_settings"
++  fi
++  
++  echo "Updated VSCode theme to: $vscode_theme"
++}
++
++# Execute the function if called with theme name
++if [[ "$1" ]]; then
++  omarchy_update_vscode_theme "$1"
++fi
+\ No newline at end of file
 ```
 
 ## Reasoning
-Created as part of VSCode theme integration (change 009) - provides automatic VSCode theme synchronization when Omarchy theme changes, keeping core system modifications minimal by isolating VSCode functionality in a separate handler script.
+Added to provide synchronized theme switching for VSCode in addition to terminal themes

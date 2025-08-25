@@ -10,10 +10,15 @@ Implement three pending tickets (006, 007, 008) to add Thunderbird email client,
 
 ## Files Modified
 
-### Modified Files  
-- `install/apps/personal.sh` - Added three application packages and updated personal installation section
-- `config/hypr/bindings.conf` - Updated keyboard bindings for all applications and reorganized Google Sheets binding
-- `config/waybar/config.jsonc` - Added MPRIS media controls module with Plexamp integration
+### Modified Files (Currently Existing)
+- `install/packaging/personal.sh` - Added 3 applications in SECTION 1: INSTALL APPS: thunderbird, firefox, plexamp-appimage
+- `config/hypr/bindings.conf` - Added keyboard bindings: Super+T (Thunderbird), Super+F (Firefox), reorganized Google Sheets to Super+S  
+- `config/waybar/config.jsonc` - Added MPRIS media controls module with Plexamp integration (play/pause, prev/next on scroll)
+
+### Applications Added (in personal.sh)
+- **Thunderbird** - Email client (Super+T binding)
+- **Firefox** - Web browser (Super+F binding) 
+- **Plexamp** - Music player (plexamp-appimage package) with Waybar MPRIS controls
 
 ### New Files
 - None (all changes integrated into existing files)

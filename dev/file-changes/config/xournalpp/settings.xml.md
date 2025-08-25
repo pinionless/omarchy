@@ -1,17 +1,17 @@
 # config/xournalpp/settings.xml
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file must remain deleted - do not restore it  
-**SAFE TO UPDATE**: N/A - file is intentionally removed  
-**CONFLICT RESOLUTION**: If upstream adds this file back, delete it again
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Deleted Xournal++ settings file as part of application streamlining
+Configuration deleted
 
 ## Diff
 ```diff
--[Deleted entire settings.xml file with Xournal++ note-taking application configuration]
+File deleted in fork
 ```
 
 ## Reasoning
-Removed as part of bloat removal (change 004) - Xournal++ note-taking application not needed for minimal development-focused system, so its configuration is no longer needed.
+Configuration no longer needed after application was replaced or removed

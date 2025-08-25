@@ -10,12 +10,14 @@ Replace the Nautilus file manager with Krusader, a more advanced dual-pane file 
 
 ## Files Modified
 
-### Modified Files  
-- `install/desktop/desktop.sh` - Replace nautilus/sushi with krusader
-- `config/hypr/bindings.conf` - Update Super+F keybinding to launch krusader
-- `bin/omarchy-menu` - Update background picker to use krusader
-- `default/hypr/apps/system.conf` - Remove nautilus-specific window rules
-- `bin/omarchy-install-dropbox` - Remove nautilus-dropbox dependency
+### Modified Files (Currently Existing)
+- `config/hypr/bindings.conf` - Updated Super+F keybinding to launch krusader instead of nautilus
+- `bin/omarchy-menu` - Updated background picker to use krusader for file browsing
+- `default/hypr/apps/system.conf` - Removed nautilus-specific window rules
+
+### Deleted Files  
+- `install/desktop/desktop.sh` - Was updated to install krusader, but file deleted in merge
+- `bin/omarchy-install-dropbox` - Dropbox installer removed (also part of bloat removal changes)
 
 ## Changes Made
 

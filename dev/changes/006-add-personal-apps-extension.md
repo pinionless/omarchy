@@ -10,14 +10,18 @@ Create a sync-friendly way to add personal applications without modifying upstre
 
 ## Files Modified
 
-### New Files
-- `install/apps/personal.sh` - Template for personal application installations
+### New Files (Currently Existing)
+- `install/packaging/personal.sh` - Personal application installation script with 3 sections: Apps, Extensions, Webapps
 
-### Modified Files  
-- `install/apps/xtras.sh` - Added hook to source personal.sh if it exists
+### Modified Files (Currently Existing)  
+- `install.sh` - Modified to source `install/packaging/personal.sh` instead of `install/packaging/lazyvim.sh`
 
-### Deleted Files
-- None
+### Implementation Details
+The personal apps extension system IS implemented and working:
+- **Apps Section**: Installs VSCode, Thunderbird, Firefox, nano, ghostty, krusader, plexamp-appimage
+- **Extensions Section**: Installs 9 VSCode theme extensions matching Omarchy themes
+- **Webapps Section**: Installs 5 productivity webapps (Google AI Studio, Calendar, Sheets, Claude, Bitwarden)
+- **Integration**: Called from main install.sh during system installation
 
 ## Changes Made
 

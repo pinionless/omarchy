@@ -1,23 +1,28 @@
 # bin/omarchy-theme-set
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: `ghostty` config touch instead of `alacritty`, VSCode theme handler call  
-**SAFE TO UPDATE**: Other theme switching functionality can accept upstream changes  
-**CONFLICT RESOLUTION**: Keep ghostty reference and VSCode handler, merge other improvements
+**CRITICAL TO PRESERVE**: Terminal replacement (alacritty→ghostty) as per critical-changes.md  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Two different changes: terminal replacement (alacritty→ghostty config reload) and VSCode theme integration
+Terminal/editor replacements as per critical-changes.md
 
-## Diff 1 - Terminal Replacement (alacritty → ghostty)
+## Diff
 ```diff
+@@ -55,8 +55,8 @@
+   fi
+ fi
+ 
 -# Trigger alacritty config reload
 -touch "$HOME/.config/alacritty/alacritty.toml"
 +# Trigger ghostty config reload
 +touch "$HOME/.config/ghostty/config"
-```
-
-## Diff 2 - VSCode Theme Integration
-```diff
+ 
+ # Restart components to apply new theme
+ pkill -SIGUSR2 btop
+@@ -67,3 +67,6 @@
+ 
  # Set new background
  omarchy-theme-bg-next
 +
@@ -26,5 +31,4 @@ Two different changes: terminal replacement (alacritty→ghostty config reload) 
 ```
 
 ## Reasoning
-- **Diff 1**: Part of system-wide terminal replacement (change 001) - config reload needed for ghostty instead of alacritty
-- **Diff 2**: Part of VSCode theme integration (change 009) - automatically sync VSCode theme when Omarchy theme changes
+Updated as part of systematic application replacements defined in critical-changes.md

@@ -1,28 +1,17 @@
 # applications/nvim.desktop
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file must remain deleted - do not restore it  
-**SAFE TO UPDATE**: N/A - file is intentionally removed  
-**CONFLICT RESOLUTION**: If upstream adds this file back, delete it again
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Deleted Neovim desktop file as part of editor setup changes
+Desktop file deleted
 
 ## Diff
 ```diff
--[Desktop Entry]
--Name=Neovim
--GenericName=Text Editor
--Comment=Edit text files
--Exec=alacritty --class=nvim --title=nvim -e nvim -- %F
--Terminal=false
--Type=Application
--Keywords=Text;editor;
--Icon=nvim
--Categories=Utility;TextEditor;
--StartupNotify=false
--MimeType=text/english;text/plain;text/x-makefile;text/x-c++hdr;text/x-c++src;text/x-chdr;text/x-csrc;text/x-java;text/x-moc;text/x-pascal;text/x-tcl;text/x-tex;application/x-shellscript;text/x-c;text/x-c++;
+File deleted in fork
 ```
 
 ## Reasoning
-Removed as part of minimal system approach - different editor setup is used instead of the default Neovim desktop integration.
+Removed as part of application cleanup - these apps are no longer installed

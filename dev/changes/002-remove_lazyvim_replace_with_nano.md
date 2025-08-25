@@ -12,28 +12,33 @@ Remove LazyVim configuration and replace Neovim with nano as the default text ed
 
 ### New Files
 - `dev/changes/002-remove_lazyvim_replace_with_nano.md` - Change documentation
-- `migrations/1755873062.sh` - Migration script for existing installations
 
-### Modified Files  
-- `install/development/nvim.sh` → `install/development/nano.sh` - Changed from nvim/LazyVim installation to nano
-- `install.sh` - Updated to source nano.sh instead of nvim.sh
-- `default/bash/envs` - Changed EDITOR from nvim to nano
-- `default/bash/aliases` - Updated n() function to use nano
+### Previously Created Files (Now Deleted)
+- `install/development/nano.sh` - Was created but later removed in merge
+- `migrations/1755873062.sh` - Migration script was created but later removed
+
+### Modified Files (Currently Existing)
+- `install.sh` - Removed sourcing of `install/packaging/lazyvim.sh`, now sources `install/packaging/personal.sh` (which installs nano)
+- `default/bash/envs` - Changed EDITOR environment variable: `export EDITOR="nano"` (was nvim)
+- `default/bash/aliases` - Updated n() function: `n() { if [ "$#" -eq 0 ]; then nano .; else nano "$@"; fi; }` (was nvim)  
 - `default/hypr/bindings.conf` - Changed Super+N binding from nvim to nano
-- `config/hypr/bindings.conf` - Changed Super+N binding from nvim to nano
-- `bin/omarchy-menu` - Changed edit_in_nvim() to edit_in_nano() and all references
-- `bin/omarchy-dev-add-migration` - Changed nvim to nano
+- `config/hypr/bindings.conf` - Changed Super+N binding from nvim to nano in user config
+- `bin/omarchy-menu` - Changed edit_in_nvim() function to edit_in_nano() and all nvim references to nano
+- `bin/omarchy-dev-add-migration` - Changed nvim references to nano
 
-### Deleted Files
-- `config/nvim/` (entire directory) - Removed LazyVim configuration
+### Deleted Files (LazyVim Removal)
+- `config/nvim/` (entire directory) - Removed LazyVim configuration  
 - `applications/nvim.desktop` - Removed Neovim desktop application file
-- `themes/*/neovim.lua` - Removed all theme-specific Neovim configurations
+- `themes/*/neovim.lua` - Removed all theme-specific Neovim configurations (11 theme files)
+- `install/packaging/lazyvim.sh` - Removed LazyVim installation script
 
 ## Changes Made
 
-### Package Management
-- Replaced `nvim luarocks tree-sitter-cli` installation with `nano` package
-- Updated installation script from `nvim.sh` to `nano.sh`
+### Package Management (Post-Merge Status)
+- **Previous**: Created `install/development/nano.sh` to replace `nvim.sh`
+- **Current Status**: Both `nano.sh` and `nvim.sh` files were deleted during merge
+- **Result**: Nano installation is now handled by other installation scripts
+- **Change**: System no longer installs complex nvim/LazyVim setup, uses simple nano editor
 
 ### Configuration Files
 - Removed entire `config/nvim/` LazyVim configuration directory

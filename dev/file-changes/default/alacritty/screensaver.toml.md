@@ -1,17 +1,17 @@
 # default/alacritty/screensaver.toml
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file must remain deleted - do not restore it  
-**SAFE TO UPDATE**: N/A - file is intentionally removed  
-**CONFLICT RESOLUTION**: If upstream adds this file back, delete it again
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Deleted Alacritty screensaver configuration template as part of terminal replacement (Alacritty → Ghostty)
+Template updates for application replacements
 
 ## Diff
 ```diff
--[Deleted entire screensaver.toml file with Alacritty screensaver configuration template]
+File deleted in fork
 ```
 
 ## Reasoning
-Removed as part of system-wide terminal replacement (change 001) - Ghostty terminal is used instead of Alacritty, so Alacritty screensaver template is no longer needed. Replaced by default/ghostty/screensaver.config.
+Updated as part of systematic application replacements defined in critical-changes.md

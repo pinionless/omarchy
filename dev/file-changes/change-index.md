@@ -1,123 +1,108 @@
 # Change Index
 
-Index of all files customized in this fork.
+Index of all files customized in this fork after major upstream merge.
 
 ## Files Modified
 
-### /
-- [`boot.sh`](boot.sh.md) - Changed default repo to pinionless/omarchy-minimal
-- [`install.sh`](install.sh.md) - Editor replacement: nvim.sh → nano.sh
+### Root Files
+- [`boot.sh`](boot.sh.md) - Application replacement updates
+- [`install.sh`](install.sh.md) - Installation script updates for application changes
+- [`README.md`](README.md.md) - Application replacement updates
 
-### applications/
-- [`applications/About.desktop`](applications/About.desktop.md) - Terminal replacement: Alacritty → Ghostty
-- [`applications/Activity.desktop`](applications/Activity.desktop.md) - Terminal replacement: Alacritty → Ghostty  
-- [`applications/Docker.desktop`](applications/Docker.desktop.md) - Terminal replacement: Alacritty → Ghostty
-- [`applications/wiremix.desktop`](applications/wiremix.desktop.md) - Terminal replacement: Alacritty → Ghostty
+### Applications
+- [`applications/About.desktop`](applications/About.desktop.md) - Terminal replacement: alacritty → ghostty
+- [`applications/Activity.desktop`](applications/Activity.desktop.md) - Terminal replacement: alacritty → ghostty
+- [`applications/Docker.desktop`](applications/Docker.desktop.md) - Terminal replacement: alacritty → ghostty
+- [`applications/hidden/dropbox.desktop`](applications/hidden/dropbox.desktop.md) - Desktop file deleted
+- [`applications/nvim.desktop`](applications/nvim.desktop.md) - Desktop file deleted
+- [`applications/typora.desktop`](applications/typora.desktop.md) - Desktop file deleted
+- [`applications/wiremix.desktop`](applications/wiremix.desktop.md) - Terminal replacement: alacritty → ghostty
 
-### bin/
-- [`bin/omarchy-cmd-screensaver`](bin/omarchy-cmd-screensaver.md) - Terminal replacement: Alacritty → Ghostty
-- [`bin/omarchy-dev-add-migration`](bin/omarchy-dev-add-migration.md) - Editor replacement: nvim → nano
-- [`bin/omarchy-font-current`](bin/omarchy-font-current.md) - Terminal replacement: Alacritty → Ghostty
-- [`bin/omarchy-font-set`](bin/omarchy-font-set.md) - Terminal replacement: Alacritty → Ghostty
-- [`bin/omarchy-launch-screensaver`](bin/omarchy-launch-screensaver.md) - Terminal replacement: Alacritty → Ghostty
-- [`bin/omarchy-lock-screen`](bin/omarchy-lock-screen.md) - Terminal replacement + Password manager replacement
-- [`bin/omarchy-menu`](bin/omarchy-menu.md) - Multiple: Terminal, Editor, File manager, Service removal
-- [`bin/omarchy-theme-set`](bin/omarchy-theme-set.md) - Terminal replacement + VSCode theme integration
+### Binary Commands
+- [`bin/omarchy-cmd-screensaver`](bin/omarchy-cmd-screensaver.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-dev-add-migration`](bin/omarchy-dev-add-migration.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-font-current`](bin/omarchy-font-current.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-font-set`](bin/omarchy-font-set.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-install-dropbox`](bin/omarchy-install-dropbox.md) - Installation script deleted
+- [`bin/omarchy-install-tailscale`](bin/omarchy-install-tailscale.md) - Installation script deleted
+- [`bin/omarchy-launch-screensaver`](bin/omarchy-launch-screensaver.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-lock-screen`](bin/omarchy-lock-screen.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-menu`](bin/omarchy-menu.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-theme-set`](bin/omarchy-theme-set.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-tui-install`](bin/omarchy-tui-install.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-tui-remove`](bin/omarchy-tui-remove.md) - Terminal/editor replacements as per critical-changes.md
+- [`bin/omarchy-vscode-theme-handler`](bin/omarchy-vscode-theme-handler.md) - New VSCode theme integration handler
 
-### config/
-- [`config/hypr/bindings.conf`](config/hypr/bindings.conf.md) - Multiple: Terminal, File manager, Editor, Applications, Webapps
-- [`config/waybar/config.jsonc`](config/waybar/config.jsonc.md) - Terminal replacement + Media player integration
+### Configuration Files
+- [`config/alacritty/alacritty.toml`](config/alacritty/alacritty.toml.md) - Configuration deleted
+- [`config/ghostty/config`](config/ghostty/config.md) - New ghostty configuration files
+- [`config/hypr/bindings.conf`](config/hypr/bindings.conf.md) - Keybinding and app rule updates for replaced applications
+- [`config/hypr/hypridle.conf`](config/hypr/hypridle.conf.md) - Keybinding and app rule updates for replaced applications
+- [`config/nvim/lazyvim.json`](config/nvim/lazyvim.json.md) - Configuration deleted
+- [`config/nvim/lua/plugins/snacks-animated-scrolling-off.lua`](config/nvim/lua/plugins/snacks-animated-scrolling-off.lua.md) - Configuration deleted
+- [`config/nvim/lua/plugins/theme.lua`](config/nvim/lua/plugins/theme.lua.md) - Configuration deleted
+- [`config/nvim/plugin/after/transparency.lua`](config/nvim/plugin/after/transparency.lua.md) - Configuration deleted
+- [`config/Typora/themes/ia_typora.css`](config/Typora/themes/ia_typora.css.md) - Application replacement updates
+- [`config/Typora/themes/ia_typora_night.css`](config/Typora/themes/ia_typora_night.css.md) - Application replacement updates
+- [`config/uwsm/env`](config/uwsm/env.md) - Application replacement updates
+- [`config/waybar/config.jsonc`](config/waybar/config.jsonc.md) - Terminal replacement in waybar configuration
+- [`config/xournalpp/settings.xml`](config/xournalpp/settings.xml.md) - Configuration deleted
 
-### default/
-- [`default/bash/aliases`](default/bash/aliases.md) - Editor replacement: nvim → nano in n() function
-- [`default/bash/envs`](default/bash/envs.md) - Editor replacement: EDITOR=nvim → EDITOR=nano
-- [`default/hypr/apps/system.conf`](default/hypr/apps/system.conf.md) - Removed window rules for Nautilus/Zoom
-- [`default/hypr/bindings.conf`](default/hypr/bindings.conf.md) - Editor replacement: nvim → nano keybinding
+### Default Templates
+- [`default/alacritty/screensaver.toml`](default/alacritty/screensaver.toml.md) - Template updates for application replacements
+- [`default/bash/aliases`](default/bash/aliases.md) - Template updates for application replacements
+- [`default/bash/envs`](default/bash/envs.md) - Template updates for application replacements
+- [`default/ghostty/screensaver.config`](default/ghostty/screensaver.config.md) - Template updates for application replacements
+- [`default/hypr/apps/chromium.conf`](default/hypr/apps/chromium.conf.md) - Template updates for application replacements
+- [`default/hypr/apps.conf`](default/hypr/apps.conf.md) - Template updates for application replacements
+- [`default/hypr/apps/system.conf`](default/hypr/apps/system.conf.md) - Template updates for application replacements
+- [`default/hypr/bindings.conf`](default/hypr/bindings.conf.md) - Template updates for application replacements
 
-### install/
-- [`install/apps/webapps.sh`](install/apps/webapps.sh.md) - Streamlined webapps to minimal set
-- [`install/apps/xtras.sh`](install/apps/xtras.sh.md) - Added personal.sh integration
-- [`install/desktop/desktop.sh`](install/desktop/desktop.sh.md) - Modified for streamlined system
-- [`install/desktop/theme.sh`](install/desktop/theme.sh.md) - Updated for Ghostty theme support
-- [`install/development/terminal.sh`](install/development/terminal.sh.md) - Terminal replacement: alacritty → ghostty
+### Installation Scripts
+- [`install/config/theme.sh`](install/config/theme.sh.md) - Installation script updates for application changes
+- [`install/packages.sh`](install/packages.sh.md) - Installation script updates for application changes
+- [`install/packaging/lazyvim.sh`](install/packaging/lazyvim.sh.md) - Installation script updates for application changes
+- [`install/packaging/personal.sh`](install/packaging/personal.sh.md) - Installation script updates for application changes
+- [`install/packaging/webapps.sh`](install/packaging/webapps.sh.md) - Installation script updates for application changes
 
-## Deleted Files
+### Theme Files
+- [`themes/catppuccin/alacritty.toml`](themes/catppuccin/alacritty.toml.md) - Theme file deleted
+- [`themes/catppuccin/ghostty.config`](themes/catppuccin/ghostty.config.md) - New ghostty theme configuration
+- [`themes/catppuccin-latte/alacritty.toml`](themes/catppuccin-latte/alacritty.toml.md) - Theme file deleted
+- [`themes/catppuccin-latte/ghostty.config`](themes/catppuccin-latte/ghostty.config.md) - New ghostty theme configuration
+- [`themes/catppuccin-latte/neovim.lua`](themes/catppuccin-latte/neovim.lua.md) - Theme file deleted
+- [`themes/catppuccin/neovim.lua`](themes/catppuccin/neovim.lua.md) - Theme file deleted
+- [`themes/everforest/alacritty.toml`](themes/everforest/alacritty.toml.md) - Theme file deleted
+- [`themes/everforest/ghostty.config`](themes/everforest/ghostty.config.md) - New ghostty theme configuration
+- [`themes/everforest/neovim.lua`](themes/everforest/neovim.lua.md) - Theme file deleted
+- [`themes/gruvbox/alacritty.toml`](themes/gruvbox/alacritty.toml.md) - Theme file deleted
+- [`themes/gruvbox/ghostty.config`](themes/gruvbox/ghostty.config.md) - New ghostty theme configuration
+- [`themes/gruvbox/neovim.lua`](themes/gruvbox/neovim.lua.md) - Theme file deleted
+- [`themes/kanagawa/alacritty.toml`](themes/kanagawa/alacritty.toml.md) - Theme file deleted
+- [`themes/kanagawa/ghostty.config`](themes/kanagawa/ghostty.config.md) - New ghostty theme configuration
+- [`themes/kanagawa/neovim.lua`](themes/kanagawa/neovim.lua.md) - Theme file deleted
+- [`themes/matte-black/alacritty.toml`](themes/matte-black/alacritty.toml.md) - Theme file deleted
+- [`themes/matte-black/ghostty.config`](themes/matte-black/ghostty.config.md) - New ghostty theme configuration
+- [`themes/matte-black/neovim.lua`](themes/matte-black/neovim.lua.md) - Theme file deleted
+- [`themes/nord/alacritty.toml`](themes/nord/alacritty.toml.md) - Theme file deleted
+- [`themes/nord/ghostty.config`](themes/nord/ghostty.config.md) - New ghostty theme configuration
+- [`themes/nord/neovim.lua`](themes/nord/neovim.lua.md) - Theme file deleted
+- [`themes/osaka-jade/alacritty.toml`](themes/osaka-jade/alacritty.toml.md) - Theme file deleted
+- [`themes/osaka-jade/ghostty.config`](themes/osaka-jade/ghostty.config.md) - New ghostty theme configuration
+- [`themes/osaka-jade/neovim.lua`](themes/osaka-jade/neovim.lua.md) - Theme file deleted
+- [`themes/ristretto/alacritty.toml`](themes/ristretto/alacritty.toml.md) - Theme file deleted
+- [`themes/ristretto/ghostty.config`](themes/ristretto/ghostty.config.md) - New ghostty theme configuration
+- [`themes/ristretto/neovim.lua`](themes/ristretto/neovim.lua.md) - Theme file deleted
+- [`themes/rose-pine/alacritty.toml`](themes/rose-pine/alacritty.toml.md) - Theme file deleted
+- [`themes/rose-pine/ghostty.config`](themes/rose-pine/ghostty.config.md) - New ghostty theme configuration
+- [`themes/rose-pine/neovim.lua`](themes/rose-pine/neovim.lua.md) - Theme file deleted
+- [`themes/tokyo-night/alacritty.toml`](themes/tokyo-night/alacritty.toml.md) - Theme file deleted
+- [`themes/tokyo-night/ghostty.config`](themes/tokyo-night/ghostty.config.md) - New ghostty theme configuration
+- [`themes/tokyo-night/neovim.lua`](themes/tokyo-night/neovim.lua.md) - Theme file deleted
 
-### applications/
-- [`applications/nvim.desktop`](applications/nvim.desktop.md) - Removed Neovim desktop file
-- [`applications/xtras/Zoom.desktop`](applications/xtras/Zoom.desktop.md) - Removed Zoom desktop file
-- [`applications/xtras/dropbox.desktop`](applications/xtras/dropbox.desktop.md) - Removed Dropbox desktop file
-- [`applications/xtras/typora.desktop`](applications/xtras/typora.desktop.md) - Removed Typora desktop file
+## Summary Statistics
 
-### bin/
-- [`bin/omarchy-install-dropbox`](bin/omarchy-install-dropbox.md) - Removed Dropbox installer
-- [`bin/omarchy-install-tailscale`](bin/omarchy-install-tailscale.md) - Removed Tailscale installer
-
-### config/
-- [`config/alacritty/alacritty.toml`](config/alacritty/alacritty.toml.md) - Removed Alacritty main config
-- [`config/nvim/lazyvim.json`](config/nvim/lazyvim.json.md) - Removed LazyVim configuration
-- [`config/nvim/lua/plugins/snacks-animated-scrolling-off.lua`](config/nvim/lua/plugins/snacks-animated-scrolling-off.lua.md) - Removed Neovim plugin config
-- [`config/nvim/lua/plugins/theme.lua`](config/nvim/lua/plugins/theme.lua.md) - Removed Neovim theme plugin config
-- [`config/nvim/plugin/after/transparency.lua`](config/nvim/plugin/after/transparency.lua.md) - Removed Neovim transparency plugin config
-- [`config/xournalpp/settings.xml`](config/xournalpp/settings.xml.md) - Removed Xournal++ settings
-
-### default/
-- [`default/alacritty/screensaver.toml`](default/alacritty/screensaver.toml.md) - Removed Alacritty screensaver template
-
-### install/
-- [`install/development/nvim.sh`](install/development/nvim.sh.md) - Removed Neovim installation script
-
-### migrations/
-- All 84 upstream migration files deleted - see critical-changes.md for policy
-
-### themes/
-- [`themes/catppuccin/alacritty.toml`](themes/catppuccin/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/catppuccin/neovim.lua`](themes/catppuccin/neovim.lua.md) - Removed Neovim theme
-- [`themes/catppuccin-latte/alacritty.toml`](themes/catppuccin-latte/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/catppuccin-latte/neovim.lua`](themes/catppuccin-latte/neovim.lua.md) - Removed Neovim theme
-- [`themes/everforest/alacritty.toml`](themes/everforest/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/everforest/neovim.lua`](themes/everforest/neovim.lua.md) - Removed Neovim theme
-- [`themes/gruvbox/alacritty.toml`](themes/gruvbox/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/gruvbox/neovim.lua`](themes/gruvbox/neovim.lua.md) - Removed Neovim theme
-- [`themes/kanagawa/alacritty.toml`](themes/kanagawa/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/kanagawa/neovim.lua`](themes/kanagawa/neovim.lua.md) - Removed Neovim theme
-- [`themes/matte-black/alacritty.toml`](themes/matte-black/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/matte-black/neovim.lua`](themes/matte-black/neovim.lua.md) - Removed Neovim theme
-- [`themes/nord/alacritty.toml`](themes/nord/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/nord/neovim.lua`](themes/nord/neovim.lua.md) - Removed Neovim theme
-- [`themes/osaka-jade/alacritty.toml`](themes/osaka-jade/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/osaka-jade/neovim.lua`](themes/osaka-jade/neovim.lua.md) - Removed Neovim theme
-- [`themes/ristretto/alacritty.toml`](themes/ristretto/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/ristretto/neovim.lua`](themes/ristretto/neovim.lua.md) - Removed Neovim theme
-- [`themes/rose-pine/alacritty.toml`](themes/rose-pine/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/rose-pine/neovim.lua`](themes/rose-pine/neovim.lua.md) - Removed Neovim theme
-- [`themes/tokyo-night/alacritty.toml`](themes/tokyo-night/alacritty.toml.md) - Removed Alacritty theme
-- [`themes/tokyo-night/neovim.lua`](themes/tokyo-night/neovim.lua.md) - Removed Neovim theme
-
-## New Files
-
-### bin/
-- [`bin/omarchy-vscode-theme-handler`](bin/omarchy-vscode-theme-handler.md) - Added VSCode theme integration handler
-
-### config/
-- [`config/ghostty/config`](config/ghostty/config.md) - Added Ghostty main configuration
-
-### default/
-- [`default/ghostty/screensaver.config`](default/ghostty/screensaver.config.md) - Added Ghostty screensaver template
-
-### install/
-- [`install/apps/personal.sh`](install/apps/personal.sh.md) - Added personal apps extension system
-- [`install/development/nano.sh`](install/development/nano.sh.md) - Added nano installation script
-
-### themes/
-- [`themes/catppuccin/ghostty.config`](themes/catppuccin/ghostty.config.md) - Added Ghostty theme
-- [`themes/catppuccin-latte/ghostty.config`](themes/catppuccin-latte/ghostty.config.md) - Added Ghostty theme
-- [`themes/everforest/ghostty.config`](themes/everforest/ghostty.config.md) - Added Ghostty theme
-- [`themes/gruvbox/ghostty.config`](themes/gruvbox/ghostty.config.md) - Added Ghostty theme
-- [`themes/kanagawa/ghostty.config`](themes/kanagawa/ghostty.config.md) - Added Ghostty theme
-- [`themes/matte-black/ghostty.config`](themes/matte-black/ghostty.config.md) - Added Ghostty theme
-- [`themes/nord/ghostty.config`](themes/nord/ghostty.config.md) - Added Ghostty theme
-- [`themes/osaka-jade/ghostty.config`](themes/osaka-jade/ghostty.config.md) - Added Ghostty theme
-- [`themes/ristretto/ghostty.config`](themes/ristretto/ghostty.config.md) - Added Ghostty theme
-- [`themes/rose-pine/ghostty.config`](themes/rose-pine/ghostty.config.md) - Added Ghostty theme
-- [`themes/tokyo-night/ghostty.config`](themes/tokyo-night/ghostty.config.md) - Added Ghostty theme
+- **Total documented files**: 81
+- **Major changes**: Terminal (alacritty→ghostty), Editor (nvim→nano), File manager (nautilus→krusader)
+- **Deleted applications**: zoom, dropbox, tailscale, typora, xournalpp, etc.
+- **New integrations**: ghostty terminal, VSCode theme sync, minimal webapps

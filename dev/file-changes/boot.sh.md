@@ -1,18 +1,25 @@
 # boot.sh
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: Must use `pinionless/omarchy-minimal` as default repo instead of `basecamp/omarchy`  
-**SAFE TO UPDATE**: Boot process logic can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep the custom fork reference, merge other functionality
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Changed default repository from basecamp/omarchy to pinionless/omarchy-minimal
+Application replacement updates
 
 ## Diff
 ```diff
+@@ -17,7 +17,7 @@
+ sudo pacman -Sy --noconfirm --needed git
+ 
+ # Use custom repo if specified, otherwise default to basecamp/omarchy
 -OMARCHY_REPO="${OMARCHY_REPO:-basecamp/omarchy}"
 +OMARCHY_REPO="${OMARCHY_REPO:-pinionless/omarchy-minimal}"
+ 
+ echo -e "\nCloning Omarchy from: https://github.com/${OMARCHY_REPO}.git"
+ rm -rf ~/.local/share/omarchy/
 ```
 
 ## Reasoning
-Updated to point to the custom fork instead of the original upstream repository, ensuring that fresh installations use this minimal/customized version by default rather than the upstream basecamp version.
+Updated as part of systematic application replacements defined in critical-changes.md

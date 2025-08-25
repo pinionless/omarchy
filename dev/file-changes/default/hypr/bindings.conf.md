@@ -1,18 +1,25 @@
 # default/hypr/bindings.conf
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: Super+N must launch `nano` instead of `nvim`  
-**SAFE TO UPDATE**: Other keybinding templates can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep nano reference, merge other keybinding functionality
+**CRITICAL TO PRESERVE**: Editor replacement (nvim→nano) as per critical-changes.md  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Updated the default editor keybinding from nvim to nano
+Template updates for application replacements
 
 ## Diff
 ```diff
+@@ -4,7 +4,7 @@
+ bindd = SUPER, F, File manager, exec, $fileManager
+ bindd = SUPER, B, Web browser, exec, $browser
+ bindd = SUPER, M, Music player, exec, $music
 -bindd = SUPER, N, Neovim, exec, $terminal -e nvim
 +bindd = SUPER, N, Text Editor, exec, $terminal -e nano
+ bindd = SUPER, T, Top, exec, $terminal -e btop
+ bindd = SUPER, D, Lazy Docker, exec, $terminal -e lazydocker
+ bindd = SUPER, G, Messenger, exec, $messenger
 ```
 
 ## Reasoning
-Part of editor replacement (change 002) - replaced LazyVim/Neovim with nano as the default text editor, so the default keybinding template needs to launch nano instead of nvim.
+Updated as part of systematic application replacements defined in critical-changes.md

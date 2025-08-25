@@ -1,18 +1,25 @@
 # bin/omarchy-font-set
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: Must modify ghostty config instead of alacritty config  
-**SAFE TO UPDATE**: Font setting logic for other components can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep ghostty syntax, merge other functionality
+**CRITICAL TO PRESERVE**: Terminal replacement (alacritty→ghostty) as per critical-changes.md  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Updated font setting to modify Ghostty config instead of Alacritty config
+Terminal/editor replacements as per critical-changes.md
 
 ## Diff
 ```diff
+@@ -4,7 +4,7 @@
+ 
+ if [[ -n "$font_name" && "$font_name" != "CNCLD" ]]; then
+   if fc-list | grep -iq "$font_name"; then
 -    sed -i "s/family = \".*\"/family = \"$font_name\"/g" ~/.config/alacritty/alacritty.toml
 +    sed -i "s/font-family = .*/font-family = $font_name/g" ~/.config/ghostty/config
+     sed -i "s/font-family: .*/font-family: '$font_name';/g" ~/.config/waybar/style.css
+     sed -i "s/font-family: .*/font-family: '$font_name';/g" ~/.config/swayosd/style.css
+     xmlstarlet ed -L \
 ```
 
 ## Reasoning
-Part of system-wide terminal replacement (change 001) - font setting needs to modify ghostty config file instead of alacritty config, and use ghostty's 'font-family = VALUE' syntax instead of alacritty's 'family = "VALUE"' syntax.
+Updated as part of systematic application replacements defined in critical-changes.md

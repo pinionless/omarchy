@@ -1,21 +1,19 @@
 # bin/omarchy-lock-screen
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: Must kill ghostty screensaver and use Bitwarden locking instead of 1Password  
-**SAFE TO UPDATE**: Other lock screen functionality can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep ghostty and Bitwarden references, merge other functionality
+**CRITICAL TO PRESERVE**: Terminal replacement (alacritty→ghostty) as per critical-changes.md  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Two changes: terminal replacement (ghostty screensaver) and password manager replacement (1Password→Bitwarden)
+Terminal/editor replacements as per critical-changes.md
 
-## Diff 1 - Terminal Replacement (alacritty → ghostty)
+## Diff
 ```diff
--pkill -f "alacritty --class Screensaver"
-+pkill -f "ghostty --class=Screensaver"
-```
-
-## Diff 2 - Password Manager Replacement (1Password → Bitwarden)
-```diff
+@@ -3,10 +3,12 @@
+ # Lock the screen
+ pidof hyprlock || hyprlock &
+ 
 -# Ensure 1password is locked
 -if pgrep -x "1password" >/dev/null; then
 -  1password --lock &
@@ -24,8 +22,12 @@ Two changes: terminal replacement (ghostty screensaver) and password manager rep
 +  # Send Ctrl+L to Bitwarden web vault to lock it
 +  # This uses hyprctl to focus the window and send the keyboard shortcut
 +  hyprctl dispatch focuswindow "vault.bitwarden.com" && sleep 0.1 && hyprctl dispatch sendkey ctrl+l
+ fi
+ 
+ # Avoid running screensaver when locked
+-pkill -f "alacritty --class Screensaver"
++pkill -f "ghostty --class=Screensaver"
 ```
 
 ## Reasoning
-- **Diff 1**: Part of system-wide terminal replacement (change 001) - stop ghostty screensaver instead of alacritty
-- **Diff 2**: Part of security integration with Bitwarden (change 008) - replaced 1Password CLI locking with Bitwarden web vault locking via keyboard shortcut
+Updated as part of systematic application replacements defined in critical-changes.md

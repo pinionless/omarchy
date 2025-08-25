@@ -1,27 +1,33 @@
 # default/hypr/apps/system.conf
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: Removed references to `org.gnome.NautilusPreviewer` and `zoom` - do not restore them  
-**SAFE TO UPDATE**: Other window rules can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep the streamlined class lists, merge other window rule functionality
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Removed window rules for applications that were streamlined away (Nautilus previewer and Zoom)
+Template updates for application replacements
 
 ## Diff
 ```diff
--windowrule = float, class:^(blueberry.py|Impala|Wiremix|org.gnome.NautilusPreviewer|Omarchy|About)$
--windowrule = center, class:^(blueberry.py|Impala|Wiremix|org.gnome.NautilusPreviewer|Omarchy|About)$
--windowrule = size 800 600, class:^(blueberry.py|Impala|Wiremix|org.gnome.NautilusPreviewer|com.gabm.satty)$
-+windowrule = float, class:^(blueberry.py|Impala|Wiremix|Omarchy|About)$
-+windowrule = center, class:^(blueberry.py|Impala|Wiremix|Omarchy|About)$
-+windowrule = size 800 600, class:^(blueberry.py|Impala|Wiremix|com.gabm.satty)$
-
+@@ -2,12 +2,14 @@
+ windowrule = float, tag:floating-window
+ windowrule = center, tag:floating-window
+ windowrule = size 800 600, tag:floating-window
++windowrule = size 620 470, class:Omarchy
++windowrule = size 700 520, class:About
+ 
+-windowrule = tag +floating-window, class:(blueberry.py|Impala|Wiremix|org.gnome.NautilusPreviewer|com.gabm.satty|Omarchy|About|TUI.float)
++windowrule = tag +floating-window, class:(blueberry.py|Impala|Wiremix|com.gabm.satty|Omarchy|About|TUI.float)
+ windowrule = tag +floating-window, class:(xdg-desktop-portal-gtk|sublime_text|DesktopEditors), title:^(Open.*Files?|Save.*Files?|Save.*As|All Files|Save)
+ 
+ # Fullscreen screensaver
+ windowrule = fullscreen, class:Screensaver
+ 
+ # No transparency on media windows
 -windowrule = opacity 1 1, class:^(zoom|vlc|mpv|org.kde.kdenlive|com.obsproject.Studio|com.github.PintaProject.Pinta|imv|org.gnome.NautilusPreviewer)$
-+windowrule = opacity 1 1, class:^(vlc|mpv|org.kde.kdenlive|com.obsproject.Studio|com.github.PintaProject.Pinta|imv)$
++windowrule = opacity 1 1, class:^(vlc|mpv|com.github.PintaProject.Pinta|imv)$
 ```
 
 ## Reasoning
-Part of application streamlining - removed window rules for applications that were removed from the system:
-- `org.gnome.NautilusPreviewer`: Removed as part of file manager replacement (change 003) - Nautilus replaced with Krusader  
-- `zoom`: Removed as part of bloat removal (change 004) - Zoom not needed for minimal system
+Updated as part of systematic application replacements defined in critical-changes.md

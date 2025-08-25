@@ -1,17 +1,17 @@
 # themes/catppuccin-latte/neovim.lua
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file must remain deleted - do not restore it  
-**SAFE TO UPDATE**: N/A - file is intentionally removed  
-**CONFLICT RESOLUTION**: If upstream adds this file back, delete it again
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Deleted Neovim theme file as part of editor setup simplification
+Theme file deleted
 
 ## Diff
 ```diff
--[Deleted entire neovim.lua file with catppuccin-latte color scheme for Neovim editor]
+File deleted in fork
 ```
 
 ## Reasoning
-Removed as part of minimal system approach - Neovim theme integration not needed for current editor setup.
+Theme configuration removed when replacing alacritty→ghostty and nvim→nano

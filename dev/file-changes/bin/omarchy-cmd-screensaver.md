@@ -1,18 +1,25 @@
 # bin/omarchy-cmd-screensaver
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: Must kill ghostty screensaver process instead of alacritty  
-**SAFE TO UPDATE**: Screensaver control logic can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep ghostty process name, merge other functionality
+**CRITICAL TO PRESERVE**: Terminal replacement (alacritty→ghostty) as per critical-changes.md  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Updated screensaver control to kill Ghostty screensaver instead of Alacritty screensaver
+Terminal/editor replacements as per critical-changes.md
 
 ## Diff
 ```diff
--        pkill -f "alacritty --class Screensaver" 2>/dev/null
-+        pkill -f "ghostty --class=Screensaver" 2>/dev/null
+@@ -9,7 +9,7 @@
+   while pgrep -x tte >/dev/null; do
+     if read -n 1 -t 0.01; then
+       pkill -x tte 2>/dev/null
+-      pkill -f "alacritty --class Screensaver" 2>/dev/null
++      pkill -f "ghostty --class=Screensaver" 2>/dev/null
+       exit 0
+     fi
+   done
 ```
 
 ## Reasoning
-Part of system-wide terminal replacement (change 001) - screensaver control needs to kill ghostty screensaver processes instead of alacritty screensaver processes.
+Updated as part of systematic application replacements defined in critical-changes.md

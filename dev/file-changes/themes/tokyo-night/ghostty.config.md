@@ -1,17 +1,44 @@
 # themes/tokyo-night/ghostty.config
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file must be kept - it's the Ghostty terminal theme  
-**SAFE TO UPDATE**: Color values and theme settings can accept upstream improvements  
-**CONFLICT RESOLUTION**: Keep this file, merge any upstream color improvements
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Added Ghostty terminal theme file as part of terminal replacement (Alacritty → Ghostty)
+New ghostty theme configuration
 
 ## Diff
 ```diff
-+[Added entire ghostty.config file with tokyo-night color scheme for Ghostty terminal]
+@@ -0,0 +1,26 @@
++# Tokyo Night theme for Ghostty
++background = 1a1b26
++foreground = a9b1d6
++
++# Selection colors
++selection-background = 7aa2f7
++
++# Standard colors
++palette = 0=32344a
++palette = 1=f7768e
++palette = 2=9ece6a
++palette = 3=e0af68
++palette = 4=7aa2f7
++palette = 5=ad8ee6
++palette = 6=449dab
++palette = 7=787c99
++
++# Bright colors
++palette = 8=444b6a
++palette = 9=ff7a93
++palette = 10=b9f27c
++palette = 11=ff9e64
++palette = 12=7da6ff
++palette = 13=bb9af7
++palette = 14=0db9d7
++palette = 15=acb0d0
+\ No newline at end of file
 ```
 
 ## Reasoning
-Created to replace the deleted alacritty.toml - provides tokyo-night color scheme for the new Ghostty terminal instead of Alacritty.
+Added theme support for ghostty terminal to replace alacritty theme

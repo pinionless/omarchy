@@ -1,17 +1,17 @@
 # themes/ristretto/alacritty.toml
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: This file must remain deleted - do not restore it  
-**SAFE TO UPDATE**: N/A - file is intentionally removed  
-**CONFLICT RESOLUTION**: If upstream adds this file back, delete it again
+**CRITICAL TO PRESERVE**: All customizations shown in diff  
+**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
+**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
 
 ## Change Summary
-Deleted Alacritty terminal theme file as part of terminal replacement (Alacritty → Ghostty)
+Theme file deleted
 
 ## Diff
 ```diff
--[Deleted entire alacritty.toml file with ristretto color scheme for Alacritty terminal]
+File deleted in fork
 ```
 
 ## Reasoning
-Removed as part of system-wide terminal replacement - Ghostty terminal is used instead of Alacritty, so Alacritty theme files are no longer needed.
+Theme configuration removed when replacing alacritty→ghostty and nvim→nano
