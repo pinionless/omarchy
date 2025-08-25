@@ -19,7 +19,7 @@ for m in $(hyprctl monitors -j | jq -r '.[] | .name'); do
   hyprctl dispatch focusmonitor $m
   hyprctl dispatch exec -- \
     ghostty --class=Screensaver \
-    --config-file ~/.local/share/omarchy/default/ghostty/screensaver.config \
+    --config-file=~/.local/share/omarchy/default/ghostty/screensaver.config \
     -e omarchy-cmd-screensaver
 done
 

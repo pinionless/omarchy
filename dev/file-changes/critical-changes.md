@@ -7,7 +7,8 @@ System-wide replacements that must be applied to ALL files, including new files 
 ### Terminal: Alacritty → Ghostty
 **CANNOT USE**: `alacritty` - will break the system  
 **MUST REPLACE WITH**: `ghostty`  
-**APPLIES TO**: All files that reference terminal applications
+**APPLIES TO**: All files that reference terminal applications  
+**SYNTAX NOTE**: Ghostty requires equals format for arguments: `--class=VALUE` and `--config-file=PATH` (not spaces)
 
 After merges, search for violations:
 ```bash
