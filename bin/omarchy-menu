@@ -188,11 +188,8 @@ show_install_menu() {
   *Package*) terminal omarchy-pkg-install ;;
   *AUR*) terminal omarchy-pkg-aur-install ;;
   *Web*) present_terminal omarchy-webapp-install ;;
-<<<<<<< HEAD
-=======
   *TUI*) present_terminal omarchy-tui-install ;;
   *Service*) show_install_service_menu ;;
->>>>>>> upstream/master
   *Style*) show_install_style_menu ;;
   *Development*) show_install_development_menu ;;
   *Editor*) show_install_editor_menu ;;
