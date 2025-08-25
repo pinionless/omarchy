@@ -20,6 +20,7 @@
 ### Added
 - **Productivity Webapps**: Google AI Studio, Google Calendar, Google Sheets, Claude.ai, Bitwarden
 - **Personal Apps Extension**: System for adding custom applications without upstream conflicts
+- **Development Tools**: Visual Studio Code with theme integration (accessible via Super+V)
 
 ## License
 

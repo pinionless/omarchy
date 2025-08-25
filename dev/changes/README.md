@@ -12,6 +12,7 @@ This directory tracks all modifications made to the Omarchy codebase for develop
 - `006-add-personal-apps-extension.md` - Add personal apps extension system
 - `007-add-new-webapps.md` - Add productivity-focused webapps
 - `008-install-apps.md` - Install Thunderbird, Firefox, and Plexamp with system integration
+- `009-install-vscode-with-theme-integration.md` - Install VSCode with theme integration
 
 ## Purpose
 Each change file documents:
