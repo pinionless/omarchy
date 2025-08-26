@@ -40,7 +40,7 @@
     }
   },
   "custom/omarchy": {
-    "format": "<span font='omarchy'>\ue900</span>",
+    "format": "󰣇",
     "on-click": "omarchy-menu",
     "tooltip-format": "Omarchy Menu\n\nSuper + Alt + Space"
   },
@@ -73,7 +73,7 @@
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
-    "nospacing": 1,
+    "spacing": 1,
     "on-click": "ghostty --class=Impala -e impala"
   },
   "battery": {
