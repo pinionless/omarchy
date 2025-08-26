@@ -1,12 +1,12 @@
 # install/packaging/personal.sh
 
 ## 🚨 MERGE GUIDANCE
-**CRITICAL TO PRESERVE**: All customizations shown in diff  
-**SAFE TO UPDATE**: Non-customized sections that don't conflict with changes  
-**CONFLICT RESOLUTION**: Preserve fork customizations, accept upstream structural changes
+**CRITICAL TO PRESERVE**: Zsh shell setup for both user and root with proper sudo permissions, VSCode theme extensions, personal app installations  
+**SAFE TO UPDATE**: Package versions, webapp URLs, extension lists  
+**CONFLICT RESOLUTION**: Preserve fork customizations including zsh configuration, accept upstream package updates
 
 ## Change Summary
-Installation script updates for application changes
+Personal application installation script with zsh shell setup and VSCode theme integration
 
 ## Diff
 ```diff

@@ -59,10 +59,11 @@ Index of all files customized in this fork after major upstream merge.
 - [`default/hypr/bindings.conf`](default/hypr/bindings.conf.md) - Template updates for application replacements
 
 ### Installation Scripts
+- [`install/config/config.sh`](install/config/config.sh.md) - Added zshrc copying alongside bashrc for comprehensive shell support
 - [`install/config/theme.sh`](install/config/theme.sh.md) - Installation script updates for application changes
 - [`install/packages.sh`](install/packages.sh.md) - Installation script updates for application changes
 - [`install/packaging/lazyvim.sh`](install/packaging/lazyvim.sh.md) - Installation script updates for application changes
-- [`install/packaging/personal.sh`](install/packaging/personal.sh.md) - Installation script updates for application changes
+- [`install/packaging/personal.sh`](install/packaging/personal.sh.md) - Fixed zsh shell setup with proper sudo permissions for user and root
 - [`install/packaging/webapps.sh`](install/packaging/webapps.sh.md) - Installation script updates for application changes
 
 ### Theme Files
