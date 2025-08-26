@@ -123,8 +123,15 @@ echo "Setting zsh as default shell..."
 if [ -z "$OMARCHY_BARE" ]; then
   # Set zsh as default shell (Ticket 003)
   if command -v zsh &> /dev/null; then
-    chsh -s $(which zsh)
-    echo "Default shell changed to zsh. Please restart your session for changes to take effect."
+    # Change shell for current user
+    sudo chsh -s $(which zsh) $USER
+    echo "Default shell changed to zsh for user: $USER"
+    
+    # Change shell for root user
+    sudo chsh -s $(which zsh) root
+    echo "Default shell changed to zsh for root user"
+    
+    echo "Please restart your session for changes to take effect."
   else
     echo -e "\e[31mzsh not found. Shell change skipped.\e[0m"
   fi
