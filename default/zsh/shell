@@ -1,0 +1,18 @@
+# History control
+setopt APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt hist_ignore_all_dups # remove older duplicate entries from history
+setopt hist_reduce_blanks # remove superfluous blanks from history items
+setopt inc_append_history # save history entries as soon as they are entered
+setopt share_history # share history between different instances of the shell
+HISTSIZE=100000
+HISTFILESIZE="${HISTSIZE}"
+SAVEHIST=100000
+
+# Additional shell options
+setopt autocd notify  # Change directory without 'cd', report background jobs immediately
+bindkey -e             # Emacs-style key bindings
+
+# Set complete path
+export PATH="./bin:$HOME/.local/bin:$PATH"

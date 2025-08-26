@@ -1,0 +1,14 @@
+# All the default Omarchy aliases and functions
+# (don't mess with these directly, just overwrite them here!)
+source ~/.local/share/omarchy/default/zsh/rc
+
+# Add your own exports, aliases, and functions here.
+#
+# Make an alias for invoking commands you use constantly
+# alias p='python'
+#
+# Use VSCode instead of nano as your default editor
+# export EDITOR="code"
+#
+# Set a custom starship config (alternatively customize the omarchy themes)
+# export STARSHIP_CONFIG="$HOME/.config/custom-starship.toml"

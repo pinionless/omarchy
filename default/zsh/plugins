@@ -1,0 +1,11 @@
+# Oh-My-Zsh configuration and plugins
+
+# Set oh-my-zsh installation path
+export ZSH="/usr/share/oh-my-zsh"
+
+# Configure oh-my-zsh plugins
+plugins=(
+  zsh-syntax-highlighting  # syntax highlighting as you type
+  zsh-autosuggestions     # command suggestions from history
+  zsh-autocomplete        # real-time completion menu (must be last)
+)

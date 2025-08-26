@@ -64,3 +64,23 @@ After merges, check for restored deleted migrations:
 ```bash
 ls migrations/ | wc -l  # Should be small number, not 84+
 ```
+
+### Shell Configuration: Bash/Zsh Review Policy
+**REVIEW REQUIRED**: Any bash configuration changes should be reviewed for potential zsh implementation  
+**CONSIDER PORTING**: Evaluate if new bash enhancements would benefit zsh users  
+**APPLIES TO**: Shell-related packages, aliases, functions, completions, prompts, and integrations
+
+When reviewing upstream changes to bash configuration:
+
+1. **Package Changes**: Review `install/packages.sh` for new shell-enhancement packages
+2. **Bash Config Changes**: Review all files in `default/bash/` directory for new features/improvements
+3. **Evaluate for Zsh**: Consider if changes would be valuable for zsh configuration
+4. **Optional Implementation**: Decide whether to implement equivalent zsh features
+
+After merges, review bash changes:
+```bash
+# Check for bash config changes that might be worth porting
+grep -r "bash" default/ install/ | grep -v ".git"
+# Review what bash enhancements exist vs zsh
+diff -r default/bash/ default/zsh/ || echo "Review differences"
+```

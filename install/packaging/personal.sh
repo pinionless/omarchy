@@ -38,14 +38,16 @@ install_vscode_theme_extensions() {
 echo "Installing personal applications..."
 
 if [ -z "$OMARCHY_BARE" ]; then
-  # Personal applications for tickets 004, 006, 007, 008
+  # Personal applications for tickets 003, 004, 006, 007, 008
   yay -S --noconfirm --needed \
     visual-studio-code-bin \
     thunderbird \
     firefox \
     nano \
     ghostty \
-    krusader
+    krusader \
+    zsh \
+    oh-my-zsh-git
   
   # AUR packages that might be flaky
   for pkg in plexamp-appimage; do
@@ -73,7 +75,26 @@ fi
 echo "Application extensions installation complete."
 
 # =============================================================================
-# SECTION 3: INSTALL WEBAPPS
+# SECTION 3: GIT REPOSITORIES
+# =============================================================================
+
+echo "Installing git repositories..."
+
+if [ -z "$OMARCHY_BARE" ]; then
+  # zsh-autocomplete plugin for oh-my-zsh (Ticket 003)
+  if [ ! -d "/usr/share/oh-my-zsh/custom/plugins/zsh-autocomplete" ]; then
+    echo "Installing zsh-autocomplete plugin..."
+    sudo git clone --depth 1 https://github.com/marlonrichert/zsh-autocomplete.git /usr/share/oh-my-zsh/custom/plugins/zsh-autocomplete || 
+      echo -e "\e[31mFailed to install zsh-autocomplete plugin. Continuing...\e[0m"
+  else
+    echo "zsh-autocomplete plugin already installed."
+  fi
+fi
+
+echo "Git repositories installation complete."
+
+# =============================================================================
+# SECTION 4: INSTALL WEBAPPS
 # =============================================================================
 
 echo "Installing personal webapps..."
@@ -92,3 +113,21 @@ fi
 echo "Personal webapps installation complete."
 
 echo "All personal installations complete."
+
+# =============================================================================
+# SECTION 5: SET DEFAULT SHELL
+# =============================================================================
+
+echo "Setting zsh as default shell..."
+
+if [ -z "$OMARCHY_BARE" ]; then
+  # Set zsh as default shell (Ticket 003)
+  if command -v zsh &> /dev/null; then
+    chsh -s $(which zsh)
+    echo "Default shell changed to zsh. Please restart your session for changes to take effect."
+  else
+    echo -e "\e[31mzsh not found. Shell change skipped.\e[0m"
+  fi
+fi
+
+echo "Shell configuration complete."

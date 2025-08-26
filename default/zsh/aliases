@@ -1,0 +1,73 @@
+# ===================================================================
+# NAVIGATION & DIRECTORIES
+# ===================================================================
+
+# Smart cd function using zoxide
+alias cd="zd"
+zd() {
+  if [ $# -eq 0 ]; then
+    builtin cd ~ && return
+  elif [ -d "$1" ]; then
+    builtin cd "$1"
+  else
+    z "$@" && printf "\U000F17A9 " && pwd || echo "Error: Directory not found"
+  fi
+}
+
+# Directory navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# ===================================================================
+# SYSTEM & UTILITIES
+# ===================================================================
+
+# System commands
+alias c='clear'
+alias r='clear && exec zsh -l'
+alias e='exit'
+alias s='sudo -s'
+
+# File operations
+alias preview="fzf --preview 'bat --style=numbers --color=always {}'"
+open() {
+  xdg-open "$@" >/dev/null 2>&1 &
+}
+
+# Editor function
+n() { if [ "$#" -eq 0 ]; then nano .; else nano "$@"; fi; }
+
+# Fastfetch
+alias ff='clear && fastfetch --config $HOME/.config/full_fastfetch.jsonc'
+alias f='fastfetch --config $HOME/.config/simple_fastfetch.jsonc'
+
+# System updates (OS-specific)
+alias cat='bat'
+alias updatelinux='yay -Syuv --noconfirm'
+
+# ===================================================================
+# DEVELOPMENT TOOLS
+# ===================================================================
+
+# Git
+alias fastgit='git add . && git commit -m "fast git" -a && git push'
+
+# Docker
+alias dev='docker-compose -f docker-compose.dev.yml up -d --build'
+alias devdown='docker-compose -f docker-compose.dev.yml down'
+alias updatedocker='dockcheck.sh -a -p -s -x 7 -u'
+
+# ===================================================================
+# MONITORING & SYSTEM INFO
+# ===================================================================
+
+alias cc='ccm --plan pro --view realtime --refresh-rate 5'
+alias cq='ccm --plan pro --view daily --refresh-rate 5'
+alias cw='ccm --plan pro --view monthly --refresh-rate 5'
+
+# ===================================================================
+# SSH & REMOTE
+# ===================================================================
+
+alias ccrdash='ssh -t heresy@192.168.1.100 "~/github/CCAutoRenew/claude-daemon-manager.sh dash"'
