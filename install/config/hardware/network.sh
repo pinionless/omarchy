@@ -4,7 +4,7 @@
 # This can happen if archinstall used ethernet
 if ! command -v iwctl &>/dev/null; then
   sudo pacman -S --noconfirm --needed iwd
-  chrootable_systemctl_enable iwd.service
+  chrootable_systemctl_enable iwd.service || echo "Warning: Could not enable iwd service (no wireless hardware?)"
 fi
 
 # Prevent systemd-networkd-wait-online timeout on boot
