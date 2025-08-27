@@ -47,7 +47,7 @@
   "custom/update": {
     "format": "",
     "exec": "omarchy-update-available",
-    "on-click": "ghostty --class=Omarchy.ghostty --title=Omarchy -e omarchy-update",
+    "on-click": "omarchy-launch-floating-terminal-with-presentation omarchy-update",
     "tooltip-format": "PinArchy update available",
     "interval": 3600
   },

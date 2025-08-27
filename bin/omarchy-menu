@@ -26,7 +26,7 @@ terminal() {
 }
 
 present_terminal() {
-  ghostty --class=Omarchy.ghostty -e bash -c "omarchy-show-logo; eval \"$1\"; omarchy-show-done;"
+  omarchy-launch-floating-terminal-with-presentation $1
 }
 
 edit_in_nano() {
@@ -35,33 +35,32 @@ edit_in_nano() {
 }
 
 install() {
-  present_terminal "echo 'Installing $1...'; sudo pacman -Sy --noconfirm $2"
+  present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm $2"
 }
 
 install_and_launch() {
-  present_terminal "echo 'Installing $1...'; sudo pacman -Sy --noconfirm $2 && setsid gtk-launch $3"
+  present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm $2 && setsid gtk-launch $3"
 }
 
 install_font() {
-  present_terminal "echo 'Installing $1...'; sudo pacman -Sy --noconfirm --needed $2 && sleep 2 && omarchy-font-set '$3'"
+  present_terminal "echo 'Installing $1...'; sudo pacman -S --noconfirm --needed $2 && sleep 2 && omarchy-font-set '$3'"
 }
 
 aur_install() {
-  present_terminal "echo 'Installing $1 from AUR...'; yay -Sy --noconfirm $2"
+  present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2"
 }
 
 aur_install_and_launch() {
-  present_terminal "echo 'Installing $1 from AUR...'; yay -Sy --noconfirm $2 && setsid gtk-launch $3"
+  present_terminal "echo 'Installing $1 from AUR...'; yay -S --noconfirm $2 && setsid gtk-launch $3"
 }
 
 show_learn_menu() {
-  case $(menu "Learn" "  Keybindings\n  Omarchy\n  Hyprland\n󰣇  Arch\n  Neovim\n󱆃  Bash") in
+  case $(menu "Learn" "  Keybindings\n  Omarchy\n  Hyprland\n󰣇  Arch\n󱆃  Bash") in
   *Keybindings*) omarchy-menu-keybindings ;;
   *Omarchy*) omarchy-launch-webapp "https://learn.omacom.io/2/the-omarchy-manual" ;;
   *Hyprland*) omarchy-launch-webapp "https://wiki.hypr.land/" ;;
   *Arch*) omarchy-launch-webapp "https://wiki.archlinux.org/title/Main_page" ;;
   *Bash*) omarchy-launch-webapp "https://devhints.io/bash" ;;
-  *Neovim*) omarchy-launch-webapp "https://www.lazyvim.org/keymaps" ;;
   *) show_main_menu ;;
   esac
 }
@@ -379,7 +378,7 @@ go_to_menu() {
   *remove*) show_remove_menu ;;
   *update*) show_update_menu ;;
   *system*) show_system_menu ;;
-  *about*) terminal bash -c 'fastfetch; read -n 1 -s' ;;
+  *about*) ghostty --class=Omarchy.ghostty --font-size=9 -e bash -c 'fastfetch; read -n 1 -s' ;;
   esac
 }
 
