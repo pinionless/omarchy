@@ -1,5 +1,5 @@
 # Import theme configuration
-config-file = ~/.config/omarchy/current/theme/ghostty.config
+config-file = ~/.config/ghostty/theme.config
 
 # Environment variables
 term = xterm-256color

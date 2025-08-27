@@ -55,8 +55,6 @@ if command -v chromium &>/dev/null; then
   fi
 fi
 
-# Trigger ghostty config reload
-touch "$HOME/.config/ghostty/config"
 
 # Restart components to apply new theme
 pkill -SIGUSR2 btop
@@ -68,5 +66,8 @@ hyprctl reload
 # Set new background
 omarchy-theme-bg-next
 
-# Update VSCode theme if handler exists (Ticket 004)
-[[ -x "$HOME/.local/share/omarchy/bin/omarchy-vscode-theme-handler" ]] && "$HOME/.local/share/omarchy/bin/omarchy-vscode-theme-handler" "$THEME_NAME"
+# Trigger ghostty config reload
+pinarchy-refresh-ghostty
+
+# Update VSCode theme if handler exists
+[[ -x "$HOME/.local/share/omarchy/bin/pinarchy-vscode-theme-handler" ]] && "$HOME/.local/share/omarchy/bin/pinarchy-vscode-theme-handler" "$THEME_NAME"
