@@ -115,7 +115,36 @@ echo "Personal webapps installation complete."
 echo "All personal installations complete."
 
 # =============================================================================
-# SECTION 5: SET DEFAULT SHELL
+# SECTION 5: CLI TOOLS
+# =============================================================================
+
+echo "Installing CLI tools..."
+
+if [ -z "$OMARCHY_BARE" ]; then
+  # CLI tools installation
+  yay -S --noconfirm --needed \
+    trash-cli
+fi
+
+echo "CLI tools installation complete."
+
+# =============================================================================
+# SECTION 6: TUI TOOLS
+# =============================================================================
+
+echo "Installing TUI tools..."
+
+if [ -z "$OMARCHY_BARE" ]; then
+  # TUI tools installation - add tools here as needed
+  # Example: yay -S --noconfirm --needed \
+  #   some-tui-tool
+  echo "No TUI tools configured yet."
+fi
+
+echo "TUI tools installation complete."
+
+# =============================================================================
+# SECTION 7: SET DEFAULT SHELL
 # =============================================================================
 
 echo "Setting zsh as default shell..."
