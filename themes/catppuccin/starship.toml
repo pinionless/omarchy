@@ -15,10 +15,10 @@ palette = 'starship'
 [palettes.starship]
 color_success = '#33cc38'
 color_error = '#cc241d'
-color_text = '#cad3f5'
-color_A = '#8aadf4'
-color_B = '#a6da95'
-color_C = '#f5bde6'
+color_text = '#cad3f5'    # Foreground - light lavender
+color_A = '#8aadf4'       # Blue - primary accent
+color_B = '#a6da95'       # Green - secondary accent
+color_C = '#f5bde6'       # Pink - tertiary accent
 
 [os]
 disabled = false
@@ -47,8 +47,7 @@ RedHatEnterprise = "󱄛"
 
 [username]
 show_always = true
-style = "bg:color_A fg:color_text"
-format = '[ $user ]($style)'
+format = '[ $user ](bg:color_A fg:color_text)'
 
 [username.aliases]
 "pinion" = ""

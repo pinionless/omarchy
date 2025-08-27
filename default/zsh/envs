@@ -2,4 +2,8 @@
 export EDITOR="nano"
 export SUDO_EDITOR="$EDITOR"
 export BAT_THEME=ansi
+
+# Disable oh-my-zsh theme to allow starship prompt
+export ZSH_THEME=""
+
 export STARSHIP_CONFIG="$HOME/.config/omarchy/current/theme/starship.toml"
