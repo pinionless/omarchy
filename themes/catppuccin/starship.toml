@@ -1,0 +1,82 @@
+add_newline=false
+
+format = """
+[](fg:color_A)\
+$os\
+$username\
+[](bg:color_B fg:color_A)\
+$directory\
+[](fg:color_B bg:color_C)\
+$git_branch\
+$git_status\
+$character"""
+
+palette = 'starship'
+[palettes.starship]
+color_success = '#33cc38'
+color_error = '#cc241d'
+color_text = '#cad3f5'
+color_A = '#8aadf4'
+color_B = '#a6da95'
+color_C = '#f5bde6'
+
+[os]
+disabled = false
+style = "bg:color_A fg:bright-white"
+
+[os.symbols]
+Windows = "󰍲"
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[username]
+show_always = true
+style = "bg:color_A fg:color_text"
+format = '[ $user ]($style)'
+
+[username.aliases]
+"pinion" = ""
+"root" = " root"   # Icon for the root user
+
+[directory]
+style = "fg:color_text bg:color_B"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[git_branch]
+symbol = ""
+style = "bg:color_C"
+format = '[[ $symbol $branch ](fg:color_text bg:color_C)]($style)'
+
+[git_status]
+style = "bg:color_C"
+format = '[[($all_status$ahead_behind )](fg:color_text bg:color_C)]($style)'
+
+[character]
+disabled = false
+success_symbol = '[](bold fg:color_C bg:color_success)[](bold fg:color_success)'
+error_symbol = '[](bold fg:color_C bg:color_error)[](bold fg:color_error)'
