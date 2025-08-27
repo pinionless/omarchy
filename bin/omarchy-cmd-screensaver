@@ -9,7 +9,7 @@ while true; do
   while pgrep -x tte >/dev/null; do
     if read -n 1 -t 0.01; then
       pkill -x tte 2>/dev/null
-      pkill -f "ghostty --class=Screensaver" 2>/dev/null
+      pkill -f "ghostty --class=Screensaver.ghostty" 2>/dev/null
       exit 0
     fi
   done

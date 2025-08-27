@@ -11,4 +11,4 @@ if pgrep -f "vault.bitwarden.com" >/dev/null; then
 fi
 
 # Avoid running screensaver when locked
-pkill -f "ghostty --class=Screensaver"
+pkill -f "ghostty --class=Screensaver.ghostty"

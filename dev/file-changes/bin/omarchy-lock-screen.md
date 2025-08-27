@@ -26,8 +26,10 @@ Terminal/editor replacements as per critical-changes.md
  
  # Avoid running screensaver when locked
 -pkill -f "alacritty --class Screensaver"
-+pkill -f "ghostty --class=Screensaver"
++pkill -f "ghostty --class=Screensaver.ghostty"
 ```
 
 ## Reasoning
 Updated as part of systematic application replacements defined in critical-changes.md
+
+**Note**: Ghostty requires dot notation for custom window classes to work (e.g., `--class=Name.ghostty`). Classes without dots are ignored.

@@ -47,7 +47,7 @@
   "custom/update": {
     "format": "",
     "exec": "omarchy-update-available",
-    "on-click": "ghostty --class=Omarchy --title=Omarchy -e omarchy-update",
+    "on-click": "ghostty --class=Omarchy.ghostty --title=Omarchy -e omarchy-update",
     "tooltip-format": "Omarchy update available",
     "interval": 3600
   },
@@ -74,7 +74,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "ghostty --class=Impala -e impala"
+    "on-click": "ghostty --class=Impala.ghostty -e impala"
   },
   "battery": {
     "format": "{capacity}% {icon}",
@@ -103,7 +103,7 @@
   },
   "pulseaudio": {
     "format": "{icon}",
-    "on-click": "ghostty --class=Wiremix -e wiremix",
+    "on-click": "ghostty --class=Wiremix.ghostty -e wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,

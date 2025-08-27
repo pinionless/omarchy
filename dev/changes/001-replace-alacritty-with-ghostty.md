@@ -225,7 +225,24 @@ omarchy-refresh-config ghostty/config
 - **FIXED**: Font configuration converted to use 'font-family' instead of 'family' key  
 - **FIXED**: All script references updated from alacritty to ghostty commands
 - **FIXED**: Migration script (`1755868213.sh`) handles package replacement and config cleanup
+- **FIXED**: Ghostty window classes updated to use dot notation (.ghostty suffix) for proper class recognition
 - Configuration file is named 'config' instead of 'alacritty.toml' in the ~/.config/ghostty/ directory
+
+## Critical Fix: Window Class Dot Notation
+**Issue**: Ghostty requires dot notation for custom window classes to work properly.
+**Solution**: All Ghostty classes updated to use `.ghostty` suffix:
+- `--class=Omarchy` → `--class=Omarchy.ghostty`
+- `--class=Wiremix` → `--class=Wiremix.ghostty`
+- `--class=Impala` → `--class=Impala.ghostty` 
+- `--class=Screensaver` → `--class=Screensaver.ghostty`
+
+**Files Updated**:
+- `config/waybar/config.jsonc` - 3 instances
+- `bin/omarchy-menu` - 4 instances
+- `bin/omarchy-launch-screensaver` - 2 instances
+- `bin/omarchy-lock-screen` - 1 instance
+- `bin/omarchy-cmd-screensaver` - 1 instance
+- `default/hypr/apps/system.conf` - Window rules updated to match new classes
 
 ## Related Issues/PRs
 [Link to any related GitHub issues or pull requests]

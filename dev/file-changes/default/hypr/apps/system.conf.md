@@ -14,15 +14,15 @@ Template updates for application replacements
  windowrule = float, tag:floating-window
  windowrule = center, tag:floating-window
  windowrule = size 800 600, tag:floating-window
-+windowrule = size 620 470, class:Omarchy
-+windowrule = size 700 520, class:About
++windowrule = size 620 470, class:Omarchy.ghostty
++windowrule = size 700 520, class:About.ghostty
  
 -windowrule = tag +floating-window, class:(blueberry.py|Impala|Wiremix|org.gnome.NautilusPreviewer|com.gabm.satty|Omarchy|About|TUI.float)
-+windowrule = tag +floating-window, class:(blueberry.py|Impala|Wiremix|com.gabm.satty|Omarchy|About|TUI.float)
++windowrule = tag +floating-window, class:(blueberry.py|Impala.ghostty|Wiremix.ghostty|com.gabm.satty|Omarchy.ghostty|About.ghostty|TUI.float)
  windowrule = tag +floating-window, class:(xdg-desktop-portal-gtk|sublime_text|DesktopEditors), title:^(Open.*Files?|Save.*Files?|Save.*As|All Files|Save)
  
  # Fullscreen screensaver
- windowrule = fullscreen, class:Screensaver
+ windowrule = fullscreen, class:Screensaver.ghostty
  
  # No transparency on media windows
 -windowrule = opacity 1 1, class:^(zoom|vlc|mpv|org.kde.kdenlive|com.obsproject.Studio|com.github.PintaProject.Pinta|imv|org.gnome.NautilusPreviewer)$
@@ -31,3 +31,5 @@ Template updates for application replacements
 
 ## Reasoning
 Updated as part of systematic application replacements defined in critical-changes.md
+
+**Note**: Ghostty requires dot notation for custom window classes to work (e.g., `--class=Name.ghostty`). Classes without dots are ignored.

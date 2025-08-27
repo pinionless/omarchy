@@ -23,7 +23,7 @@ Terminal replacement in waybar configuration
      "format": "",
      "exec": "omarchy-update-available",
 -    "on-click": "alacritty --class Omarchy --title Omarchy -e omarchy-update",
-+    "on-click": "ghostty --class=Omarchy --title=Omarchy -e omarchy-update",
++    "on-click": "ghostty --class=Omarchy.ghostty --title=Omarchy -e omarchy-update",
      "tooltip-format": "Omarchy update available",
      "interval": 3600
    },
@@ -41,7 +41,7 @@ Terminal replacement in waybar configuration
      "interval": 3,
      "nospacing": 1,
 -    "on-click": "alacritty --class=Impala -e impala"
-+    "on-click": "ghostty --class=Impala -e impala"
++    "on-click": "ghostty --class=Impala.ghostty -e impala"
    },
    "battery": {
      "format": "{capacity}% {icon}",
@@ -50,7 +50,7 @@ Terminal replacement in waybar configuration
    "pulseaudio": {
      "format": "{icon}",
 -    "on-click": "alacritty --class=Wiremix -e wiremix",
-+    "on-click": "ghostty --class=Wiremix -e wiremix",
++    "on-click": "ghostty --class=Wiremix.ghostty -e wiremix",
      "on-click-right": "pamixer -t",
      "tooltip-format": "Playing at {volume}%",
      "scroll-step": 5,
@@ -84,3 +84,5 @@ Terminal replacement in waybar configuration
 
 ## Reasoning
 Updated as part of systematic application replacements defined in critical-changes.md
+
+**Note**: Ghostty requires dot notation for custom window classes to work (e.g., `--class=Name.ghostty`). Classes without dots are ignored.

@@ -15,12 +15,12 @@ Terminal/editor replacements as per critical-changes.md
  
  terminal() {
 -  alacritty --class Omarchy -e "$@"
-+  ghostty --class=Omarchy -e "$@"
++  ghostty --class=Omarchy.ghostty -e "$@"
  }
  
  present_terminal() {
 -  alacritty --class Omarchy -e bash -c "omarchy-show-logo; eval \"$1\"; omarchy-show-done;"
-+  ghostty --class=Omarchy -e bash -c "omarchy-show-logo; eval \"$1\"; omarchy-show-done;"
++  ghostty --class=Omarchy.ghostty -e bash -c "omarchy-show-logo; eval \"$1\"; omarchy-show-done;"
  }
  
 -edit_in_nvim() {
@@ -47,11 +47,11 @@ Terminal/editor replacements as per critical-changes.md
  
    case $(menu "Setup" "$options") in
 -  *Audio*) alacritty --class=Wiremix -e wiremix ;;
-+  *Audio*) ghostty --class=Wiremix -e wiremix ;;
++  *Audio*) ghostty --class=Wiremix.ghostty -e wiremix ;;
    *Wifi*)
      rfkill unblock wifi
 -    alacritty --class=Impala -e impala
-+    ghostty --class=Impala -e impala
++    ghostty --class=Impala.ghostty -e impala
      ;;
    *Bluetooth*)
      rfkill unblock bluetooth

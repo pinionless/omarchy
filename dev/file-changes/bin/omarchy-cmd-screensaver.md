@@ -15,7 +15,7 @@ Terminal/editor replacements as per critical-changes.md
      if read -n 1 -t 0.01; then
        pkill -x tte 2>/dev/null
 -      pkill -f "alacritty --class Screensaver" 2>/dev/null
-+      pkill -f "ghostty --class=Screensaver" 2>/dev/null
++      pkill -f "ghostty --class=Screensaver.ghostty" 2>/dev/null
        exit 0
      fi
    done
@@ -23,3 +23,5 @@ Terminal/editor replacements as per critical-changes.md
 
 ## Reasoning
 Updated as part of systematic application replacements defined in critical-changes.md
+
+**Note**: Ghostty requires dot notation for custom window classes to work (e.g., `--class=Name.ghostty`). Classes without dots are ignored.

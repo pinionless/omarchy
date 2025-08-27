@@ -8,11 +8,15 @@ System-wide replacements that must be applied to ALL files, including new files 
 **CANNOT USE**: `alacritty` - will break the system  
 **MUST REPLACE WITH**: `ghostty`  
 **APPLIES TO**: All files that reference terminal applications  
-**SYNTAX NOTE**: Ghostty requires equals format for arguments: `--class=VALUE` and `--config-file=PATH` (not spaces)
+**SYNTAX NOTE**: Ghostty requires equals format for arguments: `--class=VALUE` and `--config-file=PATH` (not spaces)  
+**CRITICAL**: Ghostty window classes MUST use dot notation (e.g., `--class=Name.ghostty`) - classes without dots are ignored!  
+**FIXED CLASSES**: `Omarchy`, `Wiremix`, `Impala`, `Screensaver` → all now use `.ghostty` suffix
 
 After merges, search for violations:
 ```bash
 grep -r "alacritty" . --exclude-dir=.git
+# Also check for Ghostty classes missing dot notation:
+grep -r "ghostty --class=[^.]*[^y] " . --exclude-dir=.git
 ```
 
 ### Editor: nvim → nano

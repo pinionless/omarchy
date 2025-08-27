@@ -15,7 +15,7 @@ Terminal/editor replacements as per critical-changes.md
  
  # Exit early if screensave is already running
 -pgrep -f "alacritty --class Screensaver" && exit 0
-+pgrep -f "ghostty --class=Screensaver" && exit 0
++pgrep -f "ghostty --class=Screensaver.ghostty" && exit 0
  
  # Allow screensaver to be turned off but also force started
  if [[ -f ~/.local/state/omarchy/toggles/screensaver-off ]] && [[ $1 != "force" ]]; then
@@ -25,7 +25,7 @@ Terminal/editor replacements as per critical-changes.md
    hyprctl dispatch exec -- \
 -    alacritty --class Screensaver \
 -    --config-file ~/.local/share/omarchy/default/alacritty/screensaver.toml \
-+    ghostty --class=Screensaver \
++    ghostty --class=Screensaver.ghostty \
 +    --config-file=~/.local/share/omarchy/default/ghostty/screensaver.config \
      -e omarchy-cmd-screensaver
  done
@@ -34,3 +34,5 @@ Terminal/editor replacements as per critical-changes.md
 
 ## Reasoning
 Updated as part of systematic application replacements defined in critical-changes.md
+
+**Note**: Ghostty requires dot notation for custom window classes to work (e.g., `--class=Name.ghostty`). Classes without dots are ignored.
