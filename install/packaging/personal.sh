@@ -89,6 +89,33 @@ if [ -z "$OMARCHY_BARE" ]; then
   else
     echo "zsh-autocomplete plugin already installed."
   fi
+
+  # zsh-syntax-highlighting plugin for oh-my-zsh (Ticket 003)
+  if [ ! -d "/usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then
+    echo "Installing zsh-syntax-highlighting plugin..."
+    sudo git clone --depth 1 https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting || 
+      echo -e "\e[31mFailed to install zsh-syntax-highlighting plugin. Continuing...\e[0m"
+  else
+    echo "zsh-syntax-highlighting plugin already installed."
+  fi
+
+  # zsh-autosuggestions plugin for oh-my-zsh (Ticket 003)
+  if [ ! -d "/usr/share/oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then
+    echo "Installing zsh-autosuggestions plugin..."
+    sudo git clone --depth 1 https://github.com/zsh-users/zsh-autosuggestions.git /usr/share/oh-my-zsh/custom/plugins/zsh-autosuggestions || 
+      echo -e "\e[31mFailed to install zsh-autosuggestions plugin. Continuing...\e[0m"
+  else
+    echo "zsh-autosuggestions plugin already installed."
+  fi
+
+  # zsh-shift-select plugin for oh-my-zsh (Ticket 003)
+  if [ ! -d "/usr/share/oh-my-zsh/custom/plugins/zsh-shift-select" ]; then
+    echo "Installing zsh-shift-select plugin..."
+    sudo git clone --depth 1 https://github.com/jirutka/zsh-shift-select.git /usr/share/oh-my-zsh/custom/plugins/zsh-shift-select || 
+      echo -e "\e[31mFailed to install zsh-shift-select plugin. Continuing...\e[0m"
+  else
+    echo "zsh-shift-select plugin already installed."
+  fi
 fi
 
 echo "Git repositories installation complete."

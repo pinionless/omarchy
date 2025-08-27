@@ -13,7 +13,7 @@ if pgrep -x ghostty &> /dev/null; then
     # Focus each ghostty window and send reload key combo
     while IFS= read -r address; do
       hyprctl dispatch focuswindow "address:$address"
-      sleep 0.1
+      sleep 0.05
       hyprctl dispatch sendshortcut "CTRL SHIFT, comma, address:$address"
     done <<< "$ghostty_addresses"
     

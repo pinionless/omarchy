@@ -7,5 +7,6 @@ export ZSH="/usr/share/oh-my-zsh"
 plugins=(
   zsh-syntax-highlighting  # syntax highlighting as you type
   zsh-autosuggestions     # command suggestions from history
+  zsh-shift-select        # shift+arrow text selection
   zsh-autocomplete        # real-time completion menu (must be last)
 )
