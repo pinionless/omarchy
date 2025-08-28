@@ -1,12 +1,12 @@
 add_newline=false
 
 format = """
-[](fg:color_A)\
+[](fg:color_a)\
 $os\
 $username\
-[](bg:color_B fg:color_A)\
+[](bg:color_b fg:color_a)\
 $directory\
-[](fg:color_B bg:color_C)\
+[](fg:color_b bg:color_c)\
 $git_branch\
 $git_status\
 $character"""
@@ -16,13 +16,13 @@ palette = 'starship'
 color_success = '#33cc38'
 color_error = '#cc241d'
 color_text = '#a9b1d6'    # Similar to Tokyo Night
-color_A = '#73daca'       # Jade green - primary accent
-color_B = '#9ece6a'       # Lime green
-color_C = '#bb9af7'       # Purple accent
+color_a = '#73daca'       # Jade green - primary accent
+color_b = '#9ece6a'       # Lime green
+color_c = '#bb9af7'       # Purple accent
 
 [os]
 disabled = false
-style = "bg:color_A fg:bright-white"
+style = "bg:color_a fg:bright-white"
 
 [os.symbols]
 Windows = "󰍲"
@@ -47,14 +47,14 @@ RedHatEnterprise = "󱄛"
 
 [username]
 show_always = true
-format = '[ $user ](bg:color_A fg:color_text)'
+format = '[ $user ](bg:color_a fg:color_text)'
 
 [username.aliases]
 "pinion" = ""
 "root" = " root"   # Icon for the root user
 
 [directory]
-style = "fg:color_text bg:color_B"
+style = "fg:color_text bg:color_b"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -68,14 +68,14 @@ truncation_symbol = "…/"
 
 [git_branch]
 symbol = ""
-style = "bg:color_C"
-format = '[[ $symbol $branch ](fg:color_text bg:color_C)]($style)'
+style = "bg:color_c"
+format = '[[ $symbol $branch ](fg:color_text bg:color_c)]($style)'
 
 [git_status]
-style = "bg:color_C"
-format = '[[($all_status$ahead_behind )](fg:color_text bg:color_C)]($style)'
+style = "bg:color_c"
+format = '[[($all_status$ahead_behind )](fg:color_text bg:color_c)]($style)'
 
 [character]
 disabled = false
-success_symbol = '[](bold fg:color_C bg:color_success)[](bold fg:color_success)'
-error_symbol = '[](bold fg:color_C bg:color_error)[](bold fg:color_error)'
+success_symbol = '[](bold fg:color_c bg:color_success)[](bold fg:color_success)'
+error_symbol = '[](bold fg:color_c bg:color_error)[](bold fg:color_error)'
