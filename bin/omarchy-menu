@@ -153,7 +153,7 @@ show_setup_menu() {
   *DNS*) present_terminal omarchy-setup-dns ;;
   *Config*) show_setup_config_menu ;;
   *Fingerprint*) present_terminal omarchy-setup-fingerprint ;;
-  *Fido2*) present_terminal omarchy-setup-fido2 ;;
+  *Fido2*) present_terminal pinarchy-setup-fido2 ;;
   *) show_main_menu ;;
   esac
 }
@@ -306,7 +306,7 @@ show_remove_menu() {
   *TUI*) present_terminal omarchy-tui-remove ;;
   *Theme*) present_terminal omarchy-theme-remove ;;
   *Fingerprint*) present_terminal "omarchy-setup-fingerprint --remove" ;;
-  *Fido2*) present_terminal "omarchy-setup-fido2 --remove" ;;
+  *Fido2*) present_terminal pinarchy-remove-fido2 ;;
   *) show_main_menu ;;
   esac
 }

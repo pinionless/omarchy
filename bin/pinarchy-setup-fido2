@@ -1,0 +1,95 @@
+#!/bin/bash
+
+set -e
+
+# FIDO2 Management Script for PinArchy  
+# Enhanced FIDO2/YubiKey configuration with multiple options
+
+echo "🔐 PinArchy FIDO2 Management"
+echo
+
+check_fido2_hardware() {
+  local tokens=$(fido2-token -L 2>/dev/null)
+  if [ -z "$tokens" ]; then
+    echo "❌ No FIDO2 device detected. Please plug it in (you may need to unlock it as well)."
+    return 1
+  fi
+  
+  echo "✅ FIDO2 device(s) detected:"
+  echo "$tokens"
+  
+  return 0
+}
+
+# Define available FIDO2 components
+COMPONENTS=(
+  "login-sudo"
+  "ssh"
+  "luks"
+)
+
+# Use gum for consistent multi-select interface
+SELECTED_STRING=$(gum choose --no-limit --header "Select FIDO2 components to configure..." --selected-prefix="✗ " "${COMPONENTS[@]}")
+
+# Convert newline-separated string to array
+SELECTED=()
+while IFS= read -r line; do
+  [[ -n "$line" ]] && SELECTED+=("$line")
+done <<< "$SELECTED_STRING"
+
+if [[ ${#SELECTED[@]} -eq 0 ]]; then
+  echo "No components selected. Exiting."
+  exit 0
+fi
+
+echo
+echo "Authentication options:"
+
+# Separate checkboxes for authentication requirements
+OPTIONS_STRING=$(gum choose --no-limit --header "Select authentication requirements..." --selected-prefix="✓ " "touch-required" "pin-required")
+
+# Convert options to array
+OPTIONS=()
+while IFS= read -r line; do
+  [[ -n "$line" ]] && OPTIONS+=("$line")
+done <<< "$OPTIONS_STRING"
+
+echo
+echo "Selected components:"
+for component in "${SELECTED[@]}"; do
+  case "$component" in
+    "login-sudo") echo "  🔐 login-sudo - System authentication (login + sudo + GUI admin)" ;;
+    "ssh") echo "  🔑 ssh - Hardware-backed SSH keys" ;;
+    "luks") echo "  💾 luks - Disk encryption with FIDO2" ;;
+  esac
+done
+
+echo
+echo "Authentication requirements:"
+for option in "${OPTIONS[@]}"; do
+  case "$option" in
+    "touch-required") echo "  👆 touch-required - Physical touch needed for authentication" ;;
+    "pin-required") echo "  🔢 pin-required - PIN entry required for authentication" ;;
+  esac
+done
+
+if [[ ${#OPTIONS[@]} -eq 0 ]]; then
+  echo "  ⚡ No additional requirements - Presence-only authentication"
+fi
+
+echo
+
+# Check for FIDO2 hardware before proceeding
+if ! check_fido2_hardware; then
+  exit 1
+fi
+
+echo
+
+# Source component functions
+source "$(dirname "$0")/pinarchy-setup-fido2-sudo-login"
+source "$(dirname "$0")/pinarchy-setup-fido2-ssh"
+
+# Process selected components
+process_login_sudo_component
+process_ssh_component

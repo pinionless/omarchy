@@ -1,0 +1,126 @@
+#!/bin/bash
+
+# FIDO2 SSH component removal functions for PinArchy
+# This file is sourced by pinarchy-remove-fido2
+
+# Function to get security icon based on security level
+get_ssh_security_icon() {
+  local security_level="$1"
+  case "$security_level" in
+    "no-touch") echo "" ;;  # No icon for no requirements
+    "touch-required") echo "👆" ;;
+    "pin-required") echo "🔢" ;;
+    "touch-pin-required") echo "👆🔢" ;;
+    *) echo "❓" ;;  # Unknown security level
+  esac
+}
+
+# Function to get SSH keys from fido2_keys file
+get_ssh_keys() {
+  local keys=()
+  local display_keys=()
+  local fido2_keys="$HOME/.ssh/fido2_keys"
+  
+  # Check if fido2_keys file exists
+  if [[ ! -f "$fido2_keys" ]]; then
+    FILTERED_KEYS=()
+    DISPLAY_KEYS=()
+    return
+  fi
+  
+  # Read fido2_keys file and extract keymap entries from comments
+  while IFS= read -r line; do
+    # Skip empty lines and non-comment lines
+    [[ -z "$line" ]] && continue
+    [[ ! "$line" =~ ^#[[:space:]]*[^[:space:]] ]] && continue
+    
+    # Extract keymap data from comment line
+    # Format: # keyname:ed25519-sk:security_level:timestamp
+    if [[ "$line" =~ ^#[[:space:]]*([^:]+):([^:]+):([^:]+):(.+)$ ]]; then
+      local keyname="${BASH_REMATCH[1]}"
+      local key_type="${BASH_REMATCH[2]}"
+      local security_level="${BASH_REMATCH[3]}"
+      local timestamp="${BASH_REMATCH[4]}"
+      
+      # Skip non-SSH key types
+      [[ "$key_type" != "ed25519-sk" && "$key_type" != "ecdsa-sk" ]] && continue
+      
+      keys+=("$keyname:$key_type:$security_level:$timestamp")
+      
+      # Format for display: keyname + date + icon
+      local date_only=$(echo "$timestamp" | cut -d' ' -f1)
+      local security_icon=$(get_ssh_security_icon "$security_level")
+      local display_text="$keyname"
+      [[ -n "$date_only" ]] && display_text="$display_text    $date_only"
+      [[ -n "$security_icon" ]] && display_text="$display_text    $security_icon"
+      
+      display_keys+=("$display_text")
+    fi
+  done < "$fido2_keys"
+  
+  # Return both arrays via global variables
+  FILTERED_KEYS=("${keys[@]}")
+  DISPLAY_KEYS=("${display_keys[@]}")
+}
+
+# Function to remove SSH keys
+remove_ssh_keys() {
+  local selected_keys=("$@")
+  
+  echo "🗑️  Removing selected keys..."
+  
+  local fido2_keys="$HOME/.ssh/fido2_keys"
+  
+  # Remove keys from filesystem and SSH config
+  for key_data in "${selected_keys[@]}"; do
+    keyname=$(echo "$key_data" | cut -d: -f1)
+    key_type=$(echo "$key_data" | cut -d: -f2)
+    security_level=$(echo "$key_data" | cut -d: -f3)
+    timestamp=$(echo "$key_data" | cut -d: -f4-)
+    
+    # Use keyname as the full filename (since we now store full filename in keymap)
+    local ssh_filename="$keyname"
+    local ssh_key_path="$HOME/.ssh/$ssh_filename"
+    
+    # Remove SSH key files from filesystem
+    if [[ -f "$ssh_key_path" ]]; then
+      rm -f "$ssh_key_path"
+    fi
+    if [[ -f "$ssh_key_path.pub" ]]; then
+      rm -f "$ssh_key_path.pub"
+    fi
+    
+    # Remove from fido2_keys file (both comment and IdentityFile lines)
+    if [[ -f "$fido2_keys" ]]; then
+      # Create temporary file for atomic update
+      local temp_file=$(mktemp)
+      
+      # Process file line by line, removing matching entries
+      local skip_next_identity=false
+      
+      while IFS= read -r line; do
+        # Check if this is the keymap comment we want to remove
+        if [[ "$line" =~ ^#[[:space:]]*${keyname}:${key_type}:${security_level}:${timestamp}$ ]]; then
+          # Skip this comment line and mark to skip next IdentityFile
+          skip_next_identity=true
+          continue
+        fi
+        
+        # Check if this is an IdentityFile line for the key we're removing
+        if [[ "$skip_next_identity" == true && "$line" =~ ^IdentityFile[[:space:]]+~/.ssh/${ssh_filename}$ ]]; then
+          # Skip this IdentityFile line
+          skip_next_identity=false
+          continue
+        fi
+        
+        # Keep all other lines
+        echo "$line" >> "$temp_file"
+        skip_next_identity=false
+      done < "$fido2_keys"
+      
+      # Replace original file with cleaned version
+      mv "$temp_file" "$fido2_keys"
+      chmod 600 "$fido2_keys"
+    fi
+  done
+}

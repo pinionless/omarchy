@@ -1,0 +1,164 @@
+#!/bin/bash
+
+set -e
+
+# FIDO2 Key Removal Script for PinArchy
+# Remove registered FIDO2 keys from system authentication
+
+echo "🗑️  PinArchy FIDO2 Key Removal"
+echo
+
+# Check if keymap file exists
+KEYMAP_FILE="/etc/fido2/keymap"
+if [[ ! -f "$KEYMAP_FILE" ]]; then
+  echo "❌ No FIDO2 keys found. Keymap file does not exist."
+  echo "Use pinarchy-setup-fido2 to register keys first."
+  exit 1
+fi
+
+# Check if keymap file has content
+if [[ ! -s "$KEYMAP_FILE" ]]; then
+  echo "❌ No FIDO2 keys registered."
+  echo "Use pinarchy-setup-fido2 to register keys first."
+  exit 1
+fi
+
+# Define available FIDO2 components (single select only)
+COMPONENTS=(
+  "sudo-login"
+  "ssh" 
+  "luks"
+)
+
+# Single-select component choice
+SELECTED_COMPONENT=$(gum choose --header "Select FIDO2 component to remove keys from..." "${COMPONENTS[@]}")
+
+if [[ -z "$SELECTED_COMPONENT" ]]; then
+  echo "No component selected. Exiting."
+  exit 0
+fi
+
+echo
+echo "Selected component: $SELECTED_COMPONENT"
+echo
+
+# Source component functions
+source "$(dirname "$0")/pinarchy-remove-fido2-sudo-login"
+source "$(dirname "$0")/pinarchy-remove-fido2-ssh"
+
+# Function to get keys for selected component
+get_component_keys() {
+  local component="$1"
+  
+  case "$component" in
+    "sudo-login")
+      get_sudo_login_keys
+      ;;
+    "ssh")
+      get_ssh_keys
+      ;;
+    "luks")
+      # LUKS component not implemented yet
+      FILTERED_KEYS=()
+      DISPLAY_KEYS=()
+      ;;
+    *)
+      echo "Unknown component: $component"
+      exit 1
+      ;;
+  esac
+}
+
+# Get keys for selected component
+get_component_keys "$SELECTED_COMPONENT"
+
+# Check if any keys found for this component
+if [[ ${#FILTERED_KEYS[@]} -eq 0 ]]; then
+  echo "❌ No $SELECTED_COMPONENT keys found."
+  echo "Use pinarchy-setup-fido2 to register keys first."
+  exit 1
+fi
+
+echo "Found ${#FILTERED_KEYS[@]} $SELECTED_COMPONENT key(s):"
+echo
+
+# Multi-select interface for key removal
+SELECTED_KEYS_STRING=$(gum choose --no-limit --header "Select keys to remove..." --selected-prefix="✗ " "${DISPLAY_KEYS[@]}")
+
+# Convert selected display keys back to key data
+SELECTED_KEYS=()
+while IFS= read -r selected_display; do
+  [[ -z "$selected_display" ]] && continue
+  
+  # Extract keyname from display (first word before spaces)
+  selected_keyname=$(echo "$selected_display" | awk '{print $1}')
+  
+  # Find matching key data from filtered keys
+  for key_data in "${FILTERED_KEYS[@]}"; do
+    keyname=$(echo "$key_data" | cut -d: -f1)
+    if [[ "$keyname" == "$selected_keyname" ]]; then
+      SELECTED_KEYS+=("$key_data")
+      break
+    fi
+  done
+done <<< "$SELECTED_KEYS_STRING"
+
+if [[ ${#SELECTED_KEYS[@]} -eq 0 ]]; then
+  echo "No keys selected for removal. Exiting."
+  exit 0
+fi
+
+echo
+echo "Keys selected for removal:"
+for key_data in "${SELECTED_KEYS[@]}"; do
+  keyname=$(echo "$key_data" | cut -d: -f1)
+  second_field=$(echo "$key_data" | cut -d: -f2)
+  timestamp=$(echo "$key_data" | cut -d: -f4)
+  
+  # Handle different key formats (sudo-login vs SSH)
+  if [[ "$SELECTED_COMPONENT" == "sudo-login" ]]; then
+    # sudo-login format: keyname:authfile:key_hash:timestamp
+    authfile="$second_field"
+    security_icon=$(get_security_icon "$authfile")
+  elif [[ "$SELECTED_COMPONENT" == "ssh" ]]; then
+    # SSH format: keyname:key_type:security_level:timestamp
+    security_level=$(echo "$key_data" | cut -d: -f3)
+    security_icon=$(get_ssh_security_icon "$security_level")
+  else
+    security_icon=""
+  fi
+  
+  echo "  • $keyname ($timestamp) $security_icon"
+done
+
+echo
+echo "⚠️  This will permanently remove the selected FIDO2 keys."
+echo "You will no longer be able to use them for authentication."
+if ! gum confirm "Proceed with key removal?"; then
+  echo "Key removal cancelled."
+  exit 0
+fi
+
+echo
+
+# Delegate removal to appropriate component function
+case "$SELECTED_COMPONENT" in
+  "sudo-login")
+    remove_sudo_login_keys "${SELECTED_KEYS[@]}"
+    ;;
+  "ssh")
+    remove_ssh_keys "${SELECTED_KEYS[@]}"
+    ;;
+  "luks")
+    echo "LUKS key removal not implemented yet."
+    exit 1
+    ;;
+  *)
+    echo "Unknown component: $SELECTED_COMPONENT"
+    exit 1
+    ;;
+esac
+
+echo
+echo "✅ Selected FIDO2 keys have been removed."
+echo "Keys are no longer valid for authentication."

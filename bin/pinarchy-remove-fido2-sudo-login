@@ -1,0 +1,106 @@
+#!/bin/bash
+
+# FIDO2 sudo-login component removal functions for PinArchy
+# This file is sourced by pinarchy-remove-fido2
+
+# Function to get security icon based on authfile path
+get_security_icon() {
+  local authfile="$1"
+  case "$authfile" in
+    "/etc/fido2/no-touch") echo "" ;;  # No icon for no requirements
+    "/etc/fido2/touch-required") echo "👆" ;;
+    "/etc/fido2/pin-required") echo "🔢" ;;
+    "/etc/fido2/touch-pin-required") echo "👆🔢" ;;
+    *) echo "❓" ;;  # Unknown authfile
+  esac
+}
+
+# Function to get sudo-login keys from keymap
+get_sudo_login_keys() {
+  local keys=()
+  local display_keys=()
+  
+  # Read keymap and filter for sudo-login keys
+  while IFS=: read -r keyname authfile key_hash timestamp; do
+    # Skip empty lines
+    [[ -z "$keyname" ]] && continue
+    
+    # Filter for sudo-login keys (in /etc/fido2/* authfiles)
+    if [[ "$authfile" =~ ^/etc/fido2/(no-touch|touch-required|pin-required|touch-pin-required)$ ]]; then
+      keys+=("$keyname:$authfile:$key_hash:$timestamp")
+      
+      # Format for display: keyname + date + icon
+      local date_only=$(echo "$timestamp" | cut -d' ' -f1)
+      local security_icon=$(get_security_icon "$authfile")
+      local display_text="$keyname"
+      [[ -n "$date_only" ]] && display_text="$display_text    $date_only"
+      [[ -n "$security_icon" ]] && display_text="$display_text    $security_icon"
+      
+      display_keys+=("$display_text")
+    fi
+  done < "$KEYMAP_FILE"
+  
+  # Return both arrays via global variables
+  FILTERED_KEYS=("${keys[@]}")
+  DISPLAY_KEYS=("${display_keys[@]}")
+}
+
+# Function to remove sudo-login keys
+remove_sudo_login_keys() {
+  local selected_keys=("$@")
+  
+  echo "🗑️  Removing selected keys..."
+  
+  # Remove keys from authfiles and keymap
+  for key_data in "${selected_keys[@]}"; do
+    keyname=$(echo "$key_data" | cut -d: -f1)
+    authfile=$(echo "$key_data" | cut -d: -f2)
+    key_hash=$(echo "$key_data" | cut -d: -f3)
+    
+    # Remove from keymap file
+    sudo sed -i "/^$keyname:/d" "$KEYMAP_FILE"
+    
+    # Remove from authfile (complex - remove specific key from user line)
+    if [[ -f "$authfile" ]]; then
+      # Get current user to find their line in authfile
+      current_user=$(whoami)
+      
+      # Check if user has entries in this authfile
+      if sudo grep -q "^$current_user:" "$authfile"; then
+        # Get user's current line
+        user_line=$(sudo grep "^$current_user:" "$authfile")
+        
+        # Extract all key data (everything after username:)
+        all_keys=$(echo "$user_line" | cut -d: -f2-)
+        
+        # Split keys by colon and rebuild line without the target key
+        # We need to match by key handle (first part before comma)
+        IFS=':' read -ra key_array <<< "$all_keys"
+        new_keys=()
+        
+        for key_entry in "${key_array[@]}"; do
+          # Extract key handle from this entry
+          if [[ "$key_entry" =~ ^([^,]+), ]]; then
+            entry_key_handle="${BASH_REMATCH[1]}"
+            entry_hash=$(echo "$entry_key_handle" | sha256sum | cut -c1-10)
+            
+            # Keep this key if hash doesn't match the one we're removing
+            if [[ "$entry_hash" != "$key_hash" ]]; then
+              new_keys+=("$key_entry")
+            fi
+          fi
+        done
+        
+        # Rebuild user line with remaining keys
+        if [[ ${#new_keys[@]} -gt 0 ]]; then
+          # User has remaining keys - update their line
+          new_user_line="$current_user:$(IFS=:; echo "${new_keys[*]}")"
+          sudo sed -i "s|^$current_user:.*|$new_user_line|" "$authfile"
+        else
+          # User has no remaining keys - remove their line entirely  
+          sudo sed -i "/^$current_user:/d" "$authfile"
+        fi
+      fi
+    fi
+  done
+}

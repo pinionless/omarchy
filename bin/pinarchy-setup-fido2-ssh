@@ -1,0 +1,255 @@
+#!/bin/bash
+
+# FIDO2 SSH component functions for PinArchy
+# This file is sourced by pinarchy-setup-fido2
+#
+# PURPOSE:
+# Handles FIDO2 SSH key generation for hardware-backed SSH authentication.
+# Creates ecdsa-sk keys with appropriate touch/PIN requirements.
+#
+# INTEGRATION:
+# - Sourced by main script: pinarchy-setup-fido2
+# - Inherits variables: SELECTED, OPTIONS, KEY_NAME (if set from login-sudo)
+# - Uses GUM for consistent UI with other Omarchy tools
+#
+# SSH CONFIG MANAGEMENT:
+# Uses Include directive in ~/.ssh/config to source ~/.ssh/fido2_keys
+# Format in ~/.ssh/fido2_keys:
+# # keyname:ecdsa-sk:security_level:timestamp
+# IdentityFile ~/.ssh/keyname-touch-pin
+#
+# KEY NAMING PATTERN:
+# Base keyname + authentication suffixes:
+# - keyname (no requirements)
+# - keyname-touch (touch required)  
+# - keyname-pin (PIN required)
+# - keyname-touch-pin (both required)
+#
+# SSH KEY OPTIONS MAPPING:
+# - No requirements: -O no-touch-required
+# - Touch required: (default behavior - no flags)
+# - PIN required: -O verify-required -O no-touch-required  
+# - Touch + PIN required: -O verify-required
+
+process_ssh_component() {
+  # MAIN FUNCTION: Generate FIDO2 SSH key for hardware-backed authentication
+  # Processes SSH component if selected in main script
+  # Handles keyname generation, SSH key creation, and config management
+  
+  # Only process if ssh component is selected
+  if [[ ! " ${SELECTED[@]} " =~ " ssh " ]]; then
+    return 0
+  fi
+  echo "🔑 Processing SSH authentication..."
+  
+  # KEYNAME HANDLING: Reuse from login-sudo or ask user
+  if [[ -z "$KEY_NAME" ]]; then
+    echo
+    while [[ -z "$SSH_KEY_NAME" ]]; do
+      SSH_KEY_NAME=$(gum input --placeholder "Enter a name for this SSH key (e.g. 'work-server', 'personal-git')" --prompt "SSH key name (required): " || echo "")
+      if [[ -z "$SSH_KEY_NAME" ]]; then
+        echo "❌ SSH key name is required. Please provide a name for this key."
+      fi
+    done
+  else
+    # Reuse keyname from login-sudo setup
+    SSH_KEY_NAME="$KEY_NAME"
+    echo "📋 Using keyname from login-sudo setup: $SSH_KEY_NAME"
+  fi
+  
+  # CLEAN KEYNAME: Remove special characters and spaces
+  CLEAN_KEY_NAME=$(echo "$SSH_KEY_NAME" | sed 's/[^a-zA-Z0-9._-]//g' | sed 's/[ ]/_/g')
+  if [[ "$CLEAN_KEY_NAME" != "$SSH_KEY_NAME" ]]; then
+    echo "📝 Cleaned keyname: $SSH_KEY_NAME → $CLEAN_KEY_NAME"
+  fi
+  
+  # GENERATE FILENAME: Add authentication suffixes based on options
+  generate_ssh_filename() {
+    local base_name="$1"
+    local filename="$base_name"
+    
+    # Check selected authentication options
+    local touch_required=false
+    local pin_required=false
+    
+    for option in "${OPTIONS[@]}"; do
+      case "$option" in
+        "touch-required") touch_required=true ;;
+        "pin-required") pin_required=true ;;
+      esac
+    done
+    
+    # Add suffixes based on requirements
+    if [[ "$touch_required" == true && "$pin_required" == true ]]; then
+      filename="$base_name-touch-pin"
+    elif [[ "$touch_required" == true ]]; then
+      filename="$base_name-touch"
+    elif [[ "$pin_required" == true ]]; then
+      filename="$base_name-pin"
+    fi
+    # If no options, keep base name as-is
+    
+    echo "$filename"
+  }
+  
+  SSH_FILENAME=$(generate_ssh_filename "$CLEAN_KEY_NAME")
+  SSH_KEY_PATH="$HOME/.ssh/$SSH_FILENAME"
+  echo "🗝️  SSH key filename: $SSH_FILENAME"
+  
+  # DETERMINE SSH-KEYGEN OPTIONS: Map authentication choices to ssh-keygen flags
+  determine_ssh_options() {
+    local ssh_options=""
+    local touch_required=false
+    local pin_required=false
+    
+    # Check selected options
+    for option in "${OPTIONS[@]}"; do
+      case "$option" in
+        "touch-required") touch_required=true ;;
+        "pin-required") pin_required=true ;;
+      esac
+    done
+    
+    # Map options to ssh-keygen flags
+    if [[ "$touch_required" == false && "$pin_required" == false ]]; then
+      # No requirements - no touch needed
+      ssh_options="-O no-touch-required"
+    elif [[ "$touch_required" == true && "$pin_required" == false ]]; then
+      # Touch required - default behavior (no flags)
+      ssh_options=""
+    elif [[ "$touch_required" == false && "$pin_required" == true ]]; then
+      # PIN required - verification required but no touch
+      ssh_options="-O verify-required -O no-touch-required"
+    elif [[ "$touch_required" == true && "$pin_required" == true ]]; then
+      # Both touch and PIN required
+      ssh_options="-O verify-required"
+    fi
+    
+    echo "$ssh_options"
+  }
+  
+  SSH_OPTIONS=$(determine_ssh_options)
+  echo "⚙️  SSH options: $([[ -n "$SSH_OPTIONS" ]] && echo "$SSH_OPTIONS" || echo "(default - touch required)")"
+  
+  # SSH KEY GENERATION
+  echo
+  echo "🔑 Generating FIDO2 SSH key..."
+  echo "During key generation you must:"
+  echo "  • Enter PIN on the security key"
+  echo "  • Touch the security key (if touch is required)"
+  echo "(Even if you selected no-touch authentication.)"
+  echo
+  
+  # Check if key file already exists
+  if [[ -f "$SSH_KEY_PATH" ]]; then
+    echo "⚠️  SSH key file already exists: $SSH_KEY_PATH"
+    if ! gum confirm "Overwrite existing key?"; then
+      echo "❌ SSH key generation cancelled."
+      return 1
+    fi
+    rm -f "$SSH_KEY_PATH" "$SSH_KEY_PATH.pub"
+  fi
+  
+  # EXECUTE SSH-KEYGEN: Generate FIDO2 key with determined options
+  SSH_KEYGEN_CMD="ssh-keygen -q -t ecdsa-sk $SSH_OPTIONS -N '' -f $SSH_KEY_PATH"
+  
+  if eval "$SSH_KEYGEN_CMD" 2>/dev/null; then
+    echo "✅ SSH FIDO2 key '$SSH_FILENAME' generated successfully."
+    
+    # SSH CONFIG MANAGEMENT: Add key to SSH configuration
+    setup_ssh_config
+    
+    # KEYMAP TRACKING: Add entry to fido2_keys file
+    add_ssh_keymap_entry
+    
+  else
+    echo "❌ SSH key generation failed."
+    echo "Please check:"
+    echo "  • FIDO2 device is connected and unlocked"
+    echo "  • YubiKey firmware supports ecdsa-sk (5.2.3+)"
+    echo "  • PIN is set on device (if using PIN verification)"
+    return 1
+  fi
+}
+
+# FUNCTION: Setup SSH config with Include directive
+setup_ssh_config() {
+  local ssh_config="$HOME/.ssh/config"
+  local fido2_keys="$HOME/.ssh/fido2_keys"
+  
+  # Create ~/.ssh directory if it doesn't exist
+  mkdir -p "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh"
+  
+  # Check if Include directive already exists in main config
+  if [[ -f "$ssh_config" ]] && grep -q "^Include fido2_keys" "$ssh_config"; then
+    :
+  else
+    echo "📝 Adding Include directive to SSH config..."
+    
+    # Backup existing config if it exists
+    if [[ -f "$ssh_config" ]]; then
+      cp "$ssh_config" "$ssh_config.backup.$(date +%Y%m%d_%H%M%S)"
+    fi
+    
+    # Add Include directive at the top
+    if [[ -f "$ssh_config" ]]; then
+      # Prepend Include directive to existing config
+      echo -e "Include fido2_keys\n$(cat $ssh_config)" > "$ssh_config.tmp"
+      mv "$ssh_config.tmp" "$ssh_config"
+    else
+      # Create new config with Include directive
+      echo "Include fido2_keys" > "$ssh_config"
+    fi
+    
+    chmod 600 "$ssh_config"
+  fi
+}
+
+# FUNCTION: Add SSH key tracking entry to fido2_keys file
+add_ssh_keymap_entry() {
+  local fido2_keys="$HOME/.ssh/fido2_keys"
+  local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+  
+  # Determine security level for tracking
+  local security_level=""
+  local touch_required=false
+  local pin_required=false
+  
+  for option in "${OPTIONS[@]}"; do
+    case "$option" in
+      "touch-required") touch_required=true ;;
+      "pin-required") pin_required=true ;;
+    esac
+  done
+  
+  if [[ "$touch_required" == false && "$pin_required" == false ]]; then
+    security_level="no-touch"
+  elif [[ "$touch_required" == true && "$pin_required" == false ]]; then
+    security_level="touch-required"
+  elif [[ "$touch_required" == false && "$pin_required" == true ]]; then
+    security_level="pin-required"
+  elif [[ "$touch_required" == true && "$pin_required" == true ]]; then
+    security_level="touch-pin-required"
+  fi
+  
+  # Create fido2_keys file if it doesn't exist
+  if [[ ! -f "$fido2_keys" ]]; then
+    cat > "$fido2_keys" << 'EOF'
+# FIDO2 SSH Keys managed by PinArchy
+# DO NOT EDIT MANUALLY - Use pinarchy-setup-fido2 and pinarchy-remove-fido2
+# Format: # keyname:ecdsa-sk:security_level:timestamp
+
+EOF
+    chmod 600 "$fido2_keys"
+  fi
+  
+  # Add keymap entry as comment (use full SSH filename, not just base name)
+  echo "# $SSH_FILENAME:ecdsa-sk:$security_level:$timestamp" >> "$fido2_keys"
+  
+  # Add IdentityFile entry
+  echo "IdentityFile ~/.ssh/$SSH_FILENAME" >> "$fido2_keys"
+  echo "" >> "$fido2_keys"
+  
+  echo "📋 Added SSH key tracking entry."
+}
