@@ -8,6 +8,17 @@ set -e
 echo "🔐 PinArchy FIDO2 Management"
 echo
 
+check_fido2_hardware() {
+  local tokens=$(fido2-token -L 2>/dev/null)
+  if [ -z "$tokens" ]; then
+    echo "❌ No FIDO2 device detected. Please plug it in (you may need to unlock it as well)."
+    return 1
+  fi
+  echo "✅ FIDO2 device detected:"
+  echo "$tokens"
+  return 0
+}
+
 # Define available FIDO2 components
 COMPONENTS=(
   "login-sudo"
@@ -65,6 +76,73 @@ if [[ ${#OPTIONS[@]} -eq 0 ]]; then
 fi
 
 echo
-echo "Configuration will be implemented in future version."
-echo "Press any key to continue..."
-read -n 1 -s
+
+# Check for FIDO2 hardware before proceeding
+if ! check_fido2_hardware; then
+  exit 1
+fi
+
+echo
+
+# Process login-sudo component if selected
+if [[ " ${SELECTED[@]} " =~ " login-sudo " ]]; then
+  echo "🔐 Processing login-sudo authentication..."
+  
+  # Determine authfile based on selected authentication options
+  determine_authfile() {
+    local touch_required=false
+    local pin_required=false
+    
+    # Check selected options
+    for option in "${OPTIONS[@]}"; do
+      case "$option" in
+        "touch-required") touch_required=true ;;
+        "pin-required") pin_required=true ;;
+      esac
+    done
+    
+    # Map options to authfile paths
+    if [[ "$touch_required" == true && "$pin_required" == true ]]; then
+      echo "/etc/fido2/touch-pin-required"
+    elif [[ "$touch_required" == true ]]; then
+      echo "/etc/fido2/touch-required"
+    elif [[ "$pin_required" == true ]]; then
+      echo "/etc/fido2/pin-required"
+    else
+      echo "/etc/fido2/no-touch"
+    fi
+  }
+  
+  AUTHFILE=$(determine_authfile)
+  echo "📂 Target authfile: $AUTHFILE"
+  
+  # Register FIDO2 key
+  echo
+  echo "🔑 Registering FIDO2 key..."
+  echo "Touch your FIDO2 device when it lights up..."
+  
+  
+  # Perform registration with hostname-based origin/appid
+  if pamu2fcfg -o pam://$HOST -i pam://$HOST | sudo tee -a "$AUTHFILE" >/dev/null; then
+    echo "✅ FIDO2 key registered successfully to $AUTHFILE"
+    
+    # Ask user if they want to test sudo authentication
+    echo
+    if gum confirm "Would you like to test sudo authentication with your FIDO2 key?"; then
+      echo "🧪 Testing FIDO2 authentication with sudo..."
+      echo "Touch your FIDO2 key when prompted..."
+      echo
+      
+      if sudo echo "FIDO2 authentication test successful"; then
+        echo "🎉 Perfect! FIDO2 authentication is working correctly."
+      else
+        echo "⚠️  Test failed. You may want to check your configuration."
+      fi
+    else
+      echo "ℹ️  Skipped authentication test. Your FIDO2 key is registered and ready to use."
+    fi
+  else
+    echo "❌ FIDO2 key registration failed. Please try again."
+    exit 1
+  fi
+fi
