@@ -1,5 +1,9 @@
 # PinArchy
 
+## NO MIGRATIONS!
+THIS FORK WILL NOT FOLLOW MIGRATIONS AND WILL NOT CREATE MIGRATIONS AT THIS MOMENT.
+This will change as soon as all planned changes are implemented.
+
 ## Install
 `curl -fsSL https://raw.githubusercontent.com/pinionless/omarchy/master/boot.sh | bash`
 
