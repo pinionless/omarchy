@@ -16,8 +16,16 @@ sudo pacman -S --noconfirm --needed libfido2 pam-u2f
 # - /etc/fido2/touch-required: Touch required (default)  
 # - /etc/fido2/pin-required: PIN required (no touch)
 # - /etc/fido2/touch-pin-required: Both touch AND PIN required
+# - /etc/fido2/keymap: Maps key names to authfiles and handles
 # This allows per-device security levels - users register keys to appropriate authfile
 sudo mkdir -p /etc/fido2
+
+# Create empty authfiles and keymap
+sudo touch /etc/fido2/no-touch
+sudo touch /etc/fido2/touch-required
+sudo touch /etc/fido2/pin-required
+sudo touch /etc/fido2/touch-pin-required
+sudo touch /etc/fido2/keymap
 
 # Configure sudo PAM with four security levels
 # PAM tries each authfile in order with 'sufficient' - first match authenticates
