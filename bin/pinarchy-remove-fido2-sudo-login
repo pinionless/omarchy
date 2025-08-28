@@ -57,8 +57,6 @@ remove_sudo_login_keys() {
     authfile=$(echo "$key_data" | cut -d: -f2)
     key_hash=$(echo "$key_data" | cut -d: -f3)
     
-    echo "  Removing key: $keyname"
-    
     # Remove from keymap file
     sudo sed -i "/^$keyname:/d" "$KEYMAP_FILE"
     
@@ -98,19 +96,11 @@ remove_sudo_login_keys() {
           # User has remaining keys - update their line
           new_user_line="$current_user:$(IFS=:; echo "${new_keys[*]}")"
           sudo sed -i "s|^$current_user:.*|$new_user_line|" "$authfile"
-          echo "    - Updated authfile $authfile"
         else
           # User has no remaining keys - remove their line entirely  
           sudo sed -i "/^$current_user:/d" "$authfile"
-          echo "    - Removed user line from $authfile (no remaining keys)"
         fi
-      else
-        echo "    - User not found in $authfile (already removed?)"
       fi
-    else
-      echo "    - Authfile $authfile not found"
     fi
-    
-    echo "    - Removed from keymap"
   done
 }
