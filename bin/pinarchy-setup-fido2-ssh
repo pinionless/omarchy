@@ -244,8 +244,8 @@ EOF
     chmod 600 "$fido2_keys"
   fi
   
-  # Add keymap entry as comment
-  echo "# $CLEAN_KEY_NAME:ecdsa-sk:$security_level:$timestamp" >> "$fido2_keys"
+  # Add keymap entry as comment (use full SSH filename, not just base name)
+  echo "# $SSH_FILENAME:ecdsa-sk:$security_level:$timestamp" >> "$fido2_keys"
   
   # Add IdentityFile entry
   echo "IdentityFile ~/.ssh/$SSH_FILENAME" >> "$fido2_keys"

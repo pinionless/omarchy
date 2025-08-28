@@ -44,6 +44,7 @@ echo
 
 # Source component functions
 source "$(dirname "$0")/pinarchy-remove-fido2-sudo-login"
+source "$(dirname "$0")/pinarchy-remove-fido2-ssh"
 
 # Function to get keys for selected component
 get_component_keys() {
@@ -54,9 +55,7 @@ get_component_keys() {
       get_sudo_login_keys
       ;;
     "ssh")
-      # SSH component not implemented yet
-      FILTERED_KEYS=()
-      DISPLAY_KEYS=()
+      get_ssh_keys
       ;;
     "luks")
       # LUKS component not implemented yet
@@ -113,9 +112,21 @@ echo
 echo "Keys selected for removal:"
 for key_data in "${SELECTED_KEYS[@]}"; do
   keyname=$(echo "$key_data" | cut -d: -f1)
-  authfile=$(echo "$key_data" | cut -d: -f2)  
+  second_field=$(echo "$key_data" | cut -d: -f2)
   timestamp=$(echo "$key_data" | cut -d: -f4)
-  security_icon=$(get_security_icon "$authfile")
+  
+  # Handle different key formats (sudo-login vs SSH)
+  if [[ "$SELECTED_COMPONENT" == "sudo-login" ]]; then
+    # sudo-login format: keyname:authfile:key_hash:timestamp
+    authfile="$second_field"
+    security_icon=$(get_security_icon "$authfile")
+  elif [[ "$SELECTED_COMPONENT" == "ssh" ]]; then
+    # SSH format: keyname:key_type:security_level:timestamp
+    security_level=$(echo "$key_data" | cut -d: -f3)
+    security_icon=$(get_ssh_security_icon "$security_level")
+  else
+    security_icon=""
+  fi
   
   echo "  • $keyname ($timestamp) $security_icon"
 done
@@ -136,8 +147,7 @@ case "$SELECTED_COMPONENT" in
     remove_sudo_login_keys "${SELECTED_KEYS[@]}"
     ;;
   "ssh")
-    echo "SSH key removal not implemented yet."
-    exit 1
+    remove_ssh_keys "${SELECTED_KEYS[@]}"
     ;;
   "luks")
     echo "LUKS key removal not implemented yet."
