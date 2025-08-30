@@ -23,7 +23,7 @@ omarchy_update_vscode_theme() {
     "nord") vscode_theme="Nord" ;;
     "kanagawa") vscode_theme="Kanagawa" ;;
     "everforest") vscode_theme="Everforest Dark" ;;
-    "matte-black") vscode_theme="Matte Black" ;;
+    "matte-black") vscode_theme="Matte Black Theme" ;;
     "osaka-jade") vscode_theme="Solarized Osaka" ;;
     "ristretto") vscode_theme="Catppuccin Mocha" ;;
     *) return 0 ;;  # Skip unknown themes

@@ -18,7 +18,7 @@ install_vscode_theme_extensions() {
     "arcticicestudio.nord-visual-studio-code"
     "qufiwefefwoyn.kanagawa"
     "sainnhe.everforest"
-    "devdatvn.matte-black-theme"
+    "cleanthemes.matte-black-theme"
     "sherloach.solarized-osaka"
   )
   
@@ -150,7 +150,10 @@ echo "Installing CLI tools..."
 if [ -z "$OMARCHY_BARE" ]; then
   # CLI tools installation
   yay -S --noconfirm --needed \
-    trash-cli
+    trash-cli \
+    libfido2 \
+    libpam-u2f \
+    openssh
 fi
 
 echo "CLI tools installation complete."
